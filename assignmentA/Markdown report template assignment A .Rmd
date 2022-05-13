@@ -1,0 +1,731 @@
+---
+title: "Report Template coursework assignment A - 2021-2022"
+author: "Sara Hacipoglu (5569206), Mirijam Zhang (4660129), Lucas (4459628)"
+date: "24/03/2022"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+subtitle: CS4125 Seminar Research Methodology for Data Science
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+\tableofcontents
+
+
+# Part 1 - Design and set-up of true experiment 
+
+
+## The motivation for the planned research 
+<!-- (Max 250 words) -->
+
+Energy transition does not only encompass creating new forms of energy, it also concerns how energy is used. And as humans are its grand consumers, they also hold the power to decide where and how it is used.  
+
+
+## The theory underlying the research  
+<!-- (Max 250 words) Preferable based on theories reported in literature-->
+How engaged are consumers to consider their footprint when traveling midrange distances. There is growing awareness nowadays about the fact that flying is very harmful for the environment (e.g. flight shame), and that taking the train is a much better alternative in terms of energy consumption. The current problem in Europe is that train traveling has 2 large downsides compared to the more emissive flights. 
+    1) It takes a lot longer, often including different connections that have to be completed. 
+    2) It is way more expensive. 
+The first drawback is obvious and will always be existent compared to flying, but it can be reduced. However, the monetary drawback is one that feels counter-intuitive, and one would say it should be possible to facilitate cheaper land transport compared to air transport. But would consumers go for the land alternative given the prices are (more) equal, and would they be making these decisions over environmental reasons or other possible ones (e.g. more comfort?). 
+
+## Research questions 
+<!-- The research question that will be examined in the experiment (or alternatively the hypothesis that will be tested in the experiment) -->
+
+1. Do people generally choose train travel over air travel given price/distance equality?
+2. Is there a distance (=? Duration maybe?) limit independent of pricing for which people prefer plane over train travel?
+
+
+## The related conceptual model 
+This model should include:
+*Independent variable(s)
+  * Travel duration (duration rather than distance, they might not be proportionate on train case - no direct train route etc.)
+  * Travel cost
+*Dependent variable
+  * Choice of travel 
+*Mediating variable (at least 1)
+  * Travel comfort (duration - comfort - preference)
+*Moderating variable (at least 1)
+  * Fear for airplanes
+  * Financial status, age (for cost)
+  * Culture (europe has train travel culture, vs US or other regions)
+*Extraneous variable
+  * Travel luxury (extraneous variable, influences cost and comfort but is not a study variable) 
+
+Taking the most relevant variables in consideration: we conceptualize the follow graph model:
+![The conceptual model](C:/Users/Mirij/Downloads/experiment.png)
+
+
+## Experimental Design 
+<!-- Note that the study should have a true experimental design-->
+
+Subjects are divided in 4 groups
+
+- Subject from group 1 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
+- Subject from group 2 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1+y1, or don't travel.
+- Subject from group 3, after watching a video about the environmental benefits of train transport instead of air transport, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
+- Subject from group 4, after watching a video about the environmental benefits of train transport instead of air transport, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1+y1, or don't travel.
+
+
+## Experimental procedure 
+<!-- Describe how the experiment will be executed step by step -->
+The experiment can be executed decentralized in a real setting (ensuring validity) by setting up a collaboration with a ticket provider, which provides a portal where both train and plane tickets can be bought (probably for a limited amount of trajectories that are properly reachable by both air and train travel (e.g. the destination should not require some extensive other form of travel). 
+
+Once on the platform, subjects will have to fill in a small questionnaire to document some characteristics (e.g. environmental focus and financial means). The questionnaire will start with a paragraph explaining data is anonymously gathered through this portal for experimental reasons, and the prices available might be influenced unexpectedly and might not reflect realistic prices. After filling in the questionnaire, the subject either shown a video addressing the urgency of environmental awareness, or it is not shown any video. The underlying algorithm can decide this, preventing a selection bias. The subject is then allowed to search for journeys, for which it is presented always the train and air options together, with prices based on the experimental design, again selected by the algorithm to ensure the validity of the data collection.  
+
+
+## Measures
+<!-- Describe the measure that will be used -->
+
+E.g. Using screen monitoring HotJar
+
+## Participants
+<!-- Describe which participants will recruit in the study and how they will be recruited -->
+Through social media it is marketed to all kinds of individuals, and through the study it is monitored what target groups require extra input so that marketing focus can be adjusted. The goal is to include any type of person that considers traveling to destinations by air. The participants get real tickets through the collaboration with the ticket provider, so possibly a hype might start around the platform. 
+
+
+## Suggested statistical analyses
+Describe the statistical test you suggest to care out on the collected data
+
+# Part 2 - Generalized linear models
+
+## Question 1 Twitter sentiment analysis (Between groups - single factor) 
+
+### Conceptual model
+Make a conceptual model for the following research question: Is there a difference in the sentiment of the tweets related to the different individuals/organisations?
+
+![Conceptual model Twitter sentiment analysis](C:/Users/mirij/Downloads/experiment2.png)
+
+### Collecting tweets, and data preparation
+Include the annotated R script (excluding your personal Keys and Access Tokens information), but put echo=FALSE, so code is not included in the output pdf file.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
+
+#during writing you could add "eval = FALSE",  kntr will than not run this code chunk (take some time do)
+# getwd()
+# setwd("C:/Users/mirij/Desktop") 
+# apple , note use / instead of \, which used by windows
+
+
+# install.packages("twitteR", dependencies = TRUE)
+library(twitteR)
+# install.packages("RCurl", dependencies = T)
+library(RCurl)
+# install.packages("bitops", dependencies = T)
+library(bitops)
+# install.packages("plyr", dependencies = T)
+library(plyr)
+# install.packages('stringr', dependencies = T)
+library(stringr)
+# install.packages("NLP", dependencies = T)
+library(NLP)
+# install.packages("tm", dependencies = T)
+library(tm)
+# install.packages("wordcloud", dependencies=T)
+# install.packages("RColorBrewer", dependencies=TRUE)
+library(RColorBrewer)
+library(wordcloud)
+# install.packages("reshape", dependencies=T)
+library(reshape)
+
+################### functions
+
+  
+clearTweets <- function(tweets, excl) {
+  
+  tweets.text <- sapply(tweets, function(t)t$getText()) #get text out of tweets 
+
+  
+  tweets.text = gsub('[[:cntrl:]]', '', tweets.text)
+  tweets.text = gsub('\\d+', '', tweets.text)
+  tweets.text <- str_replace_all(tweets.text,"[^[:graph:]]", " ") #remove graphic
+  
+  
+  corpus <- Corpus(VectorSource(tweets.text))
+  
+  corpus_clean <- tm_map(corpus, removePunctuation)
+  corpus_clean <- tm_map(corpus_clean, content_transformer(tolower))
+  corpus_clean <- tm_map(corpus_clean, removeWords, stopwords("english"))
+  corpus_clean <- tm_map(corpus_clean, removeNumbers)
+  corpus_clean <- tm_map(corpus_clean, stripWhitespace)
+  corpus_clean <- tm_map(corpus_clean, removeWords, c(excl,"http","https","httpst"))
+  
+
+  return(corpus_clean)
+} 
+
+
+## capture all the output to a file.
+
+################# Collect from Twitter
+
+# for creating a twitter app (apps.twitter.com) see youtube https://youtu.be/lT4Kosc_ers
+#consumer_key <-'your key'
+#consumer_scret <- 'your secret'
+#access_token <- 'your access token'
+#access_scret <- 'your access scret'
+
+source("your_twitter.R") #this file will set my personal variables for my twitter app, adjust the name of this file. use the provide template your_twitter.R
+
+setup_twitter_oauth(consumer_key,consumer_scret, access_token,access_scret) #connect to  twitter app
+
+
+##### This example uses the following 3 celebrities: Donald Trump, Hillary Clinton, and Bernie Sanders
+##  You should replace this with your own celebrities, at least 3, but more preferred 
+##  Note that it will take the computer some to collect the tweets
+
+#tweets_T <- searchTwitter("#trump", n=200, lang="en", resultType="recent") #n recent tweets about Donald Trump, in English ( Twitter sometimes modifies number of tweets that you can collect)
+#tweets_C <- searchTwitter("#hillary", n=200, lang="en", resultType="recent") #n recent tweets about Hillary Clinton
+#tweets_B <- searchTwitter("#bernie", n=200, lang="en", resultType="recent") #n recent tweets about Bernie Sanders
+
+
+tweets_T <- searchTwitter("#EnergyTransition", n=200, lang="en", resultType="recent") #n recent tweets about Energy Transition, in English ( Twitter sometimes modifies number of tweets that you can collect)
+tweets_C <- searchTwitter("#SustainableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Sustainable Energy
+tweets_B <- searchTwitter("#RenewableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Renewable Energy
+
+
+######################## WordCloud
+### This not requires in the assignment, but still fun to do 
+
+# based on https://youtu.be/JoArGkOpeU0
+
+#corpus_T<-clearTweets(tweets_T, c("trump","amp","realdonaldtrump","trumptrain","donald","trumps","alwaystrump")) #remove also some campain slogans
+#wordcloud(corpus_T, max.words=50)
+
+#corpus_C<-clearTweets(tweets_C, c("hillary","amp","clinton","hillarys"))
+#wordcloud(corpus_C,  max.words=50)
+
+#corpus_B<-clearTweets(tweets_B, c("bernie", "amp", "sanders","bernies"))
+#wordcloud(corpus_B,  max.words=50)
+##############################
+
+######################## Sentiment analysis
+
+tweets_T.text <- laply(tweets_T, function(t)t$getText()) #get text out of tweets 
+tweets_C.text <- laply(tweets_C, function(t)t$getText()) #get text out of tweets
+tweets_B.text <- laply(tweets_B, function(t)t$getText()) #get text out of tweets
+
+
+#taken from https://github.com/mjhea0/twitter-sentiment-analysis
+pos <- scan('positive-words.txt', what = 'character', comment.char=';') #read the positive words
+neg <- scan('negative-words.txt', what = 'character', comment.char=';') #read the negative words
+
+source("sentiment3.R") #load algorithm
+# see sentiment3.R form more information about sentiment analysis. It assigns a intereger score
+# by subtracting the number of occurrence of negative words from that of positive words
+
+analysis_T <- score.sentiment(tweets_T.text, pos, neg)
+analysis_C <- score.sentiment(tweets_C.text, pos, neg)
+analysis_B <- score.sentiment(tweets_B.text, pos, neg)
+
+#print(analysis_T)
+#print(analysis_C)
+#print(analysis_B)
+
+sem<-data.frame(analysis_T$score, analysis_C$score, analysis_B$score)
+
+semFrame <-melt(sem, measured=c(analysis_T.score,analysis_C.score, analysis_B.score ))
+names(semFrame) <- c("Candidate", "score")
+semFrame$Candidate <-factor(semFrame$Candidate, labels=c("Energy Transition", "Sustainable Energy", "Renewable Energy")) # change the labels for your individual/organisation
+
+#The data you need for the analyses can be found in semFrame
+#print(semFrame)
+```
+
+### Homogeneity of variance analysis
+Analyze the homogeneity of variance of sentiments of the tweets of the different individuals/organisations, and provide interpretation
+
+```{r}
+#include your code and output in the document
+library(car)
+
+leveneTest(semFrame$score, semFrame$Candidate, center = median)
+
+```
+The variance across the different organisations is tested using the  Levene's test. The P test results in a value of 0.05258, which above 0.05. Thus, it can be concluded that there is no reason to reject the null hypothesis and we can assume the organisations are similar.
+ <!-- Is the variance across the different organisations equal? -->
+
+### Visual inspection Mean and distribution sentiments
+Graphically examine the mean and distribution sentiments of tweets for each individual/organisation, and provide interpretation
+
+```{r}
+#include your code and output in the document
+
+energyTransition<-semFrame[semFrame$Candidate=="Energy Transition",]
+#print(energyTransition)
+hist(energyTransition$score, xlab="score")
+
+sustainableEnergy<-semFrame[semFrame$Candidate=="Sustainable Energy",]
+#print(sustainableEnergy)
+hist(sustainableEnergy$score, xlab="score")
+
+renewableEnergy<-semFrame[semFrame$Candidate=="Renewable Energy",]
+#print(renewableEnergy)
+hist(renewableEnergy$score, xlab="score")
+
+
+mysummary <- function(x,npar=TRUE,print=TRUE) {
+if (!npar) {
+center <- mean(x); spread <- sd(x)
+} else {
+center <- median(x); spread <- mad(x)
+}
+if (print & !npar) {
+cat("Mean=", center, "\n", "SD=", spread, "\n")
+} else if (print & npar) {
+cat("Median=", center, "\n", "MAD=", spread, "\n")
+}
+result <- list(center=center,spread=spread)
+return(result)
+}
+d<-mysummary(renewableEnergy$score, FALSE)
+d<-mysummary(sustainableEnergy$score, FALSE)
+d<-mysummary(energyTransition$score, FALSE)
+
+boxplot(score ~ Candidate, data=semFrame, main="Sentiment distribution in tweets",
+xlab="Organisation", ylab="score")
+
+```
+The mean for renewable Energy and sustainable Energy are close to each other. Whereas the mean for energy Transition is significantly lower. The standard deviations for all organisations are similar.
+
+From the boxplot we can see that for all three topics, most of the tweets have a sentiment around 0.
+
+### Frequentist approach
+
+#### Linear model
+Use a linear model to analyze whether the knowledge to which individual/organisation a tweet relates has a significant impact on explaining the sentiments of the tweets. Assume a Gaussian distribution for the tweet’s sentiments rating. Provide interpretation of results 
+
+```{r}
+#include your code and output in the document
+
+#library(gmodels) #CrossTable
+
+#CrossTable(semFrame$score, semFrame$Candidate, prop.r=FALSE, prop.c = FALSE,
+#prop.t = FALSE,
+#prop.chisq=FALSE, format = "SPSS",
+#fisher = FALSE, chisq = TRUE,
+#expected = FALSE, sresid = FALSE)
+
+# print(energyTransition)
+# print(renewableEnergy)
+# print(sustainableEnergy)
+
+#From lecture slides
+
+# Model0 <- lm(score ~ 1, data = lec7dsub)
+# model1 <- lm(score ~ Feedback, data = lec7dsub)
+# anova(model0,model1, test = "F")
+      
+#From markdown
+# For model without predictor, should we import the same amount of tweets but not related to the topics of Energy transition and then make a comparison?
+model0<- lm(score ~ 1, data = semFrame) #model without predictor
+model1 <- lm(score ~ Candidate, data = semFrame) #model with predictor
+
+# model2 <- lm(score ~ Candidate, data = sustainableEnergy) #model with predictor
+# model3 <- lm(score ~ Candidate, data = renewableEnergy) #model with predictor
+# model4 <- lm(score ~ Candidate, data = energyTransition) #model with predictor
+# 
+# pander(anova(model0, model2, test = 'F'),
+# caption = "Compare if sustainableEnergy provide better fit than no knowledge")
+# pander(anova(model0, model3, test = 'F'),
+# caption = "Compare if renewableEnergy provide better fit than no knowledge")
+# pander(anova(model0, model4, test = 'F'),
+# caption = "Compare if energyTransition provide better fit than no knowledge")
+# install.packages('pander')
+library(pander)
+pander(anova(model0, model1, test = 'F'),
+caption = "Compare if knowledge provide better fit than no knowledge")
+
+pander(anova(model1),
+caption = "Effect of organisation type on post test score")
+
+
+summary(model0)
+summary(model1)
+
+```
+The P value is significantly smaller than 0.05, thus we can accept the null hypothesis. Thus, the organisation gives insight into the sentiment.
+From the last column in the summary model, we see that the p-value for sustainableEnergy and renewableEnergy is larger than 0.05. Thus the organisation has significant impact on the output score.
+R-squared is 0.04156, which means that 4% percent of the variance in the observed data can be explained by the model, which is very small. 86% cannot be explained by the model. 
+
+#### Post Hoc analysis
+If a model that includes the individual/organisation is better in explaining the sentiments of tweets than a model without such predictor, conduct a post-hoc analysis with e.g. Bonferroni correction, to examine which of individual/organisation tweets differ from the other individual/organisation tweets. Provide interpretation of the results
+
+```{r}
+#include your code and output in the document
+
+```
+
+#### Report section for a scientific publication
+Write a small section for a scientific publication (journal or a conference), in which you report the results of the analyses, and explain the conclusions that can be drawn in a format commonly used by the scientific community Look at Brightspace for examples papers and guidelines on how to do this. 
+
+Tweets without the knowledge of each organisation did have significant (t(597) = 12.94, p=3.141e-06) different post test scores (M = 0.395, SD = 0.03145) than the tweets with knowledge of each organisation (energyTransition: M = 0.17500 , SD = 0.8047441), (sustainableEnergy: M = 0.53, SD = 0.7153029) and (renewableEnergy: M = 0.48, SD = 0.7432105). 
+
+### Bayesian Approach
+
+#### Model description
+
+Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown). Assume a Gaussian distribution for the tweet’s sentiments rating. Justify the priors.
+```{r}
+# devtools::install_github("rasmusab/bayesian_first_aid")
+# library(BayesianFirstAid)
+# 
+# fit1<- bayes.t.test(renewableEnergy$score,energyTransition$score)
+# show(fit1)
+# plot(fit1)
+
+# fit2 <- bayes.t.test(renewableEnergy$score,sustainableEnergy$score)
+# show(fit2)
+# plot(fit2)
+
+# fit3 <- bayes.t.test(energyTransition$score,sustainableEnergy$score)
+# show(fit3)
+# plot(fit3)
+```
+
+Null model:
+```{r, warning=FALSE}
+library(rethinking)
+
+m0 <-map2stan(
+  alist(
+  score ~ dnorm(mu, sigma),
+  mu <- a,
+  a ~ dnorm(0, 1),
+  sigma ~ dnorm(0, 1)
+  ), data = semFrame ,iter = 100, chains = 4, cores = 4
+)
+```
+
+Model that includes parameter estimation for the organisations:
+```{r, warning=FALSE}
+m1 <-map2stan(
+  alist(
+  score ~ dnorm(mu, sigma),
+  mu <- a + b*Candidate,
+  a ~ dnorm(0, 1),
+  b ~ dnorm(0,1),
+  sigma ~ dnorm(0, 1)
+  ), data = semFrame ,iter = 100, chains = 4, cores = 4
+)
+
+```
+The chosen priors are 0, as it is a neutral value for sentiment.
+
+#### Model comparison
+
+Conduct model analysis and provide brief interpretation of the results
+
+```{r}
+#include your code and output in the document
+
+precis(m0, prob = .95)
+
+precis(m1, prob = .95)
+
+PSIS(m0)
+WAIC(m0)
+
+# compare(m0, m1, func=PSIS)
+# 
+# compare(m0, m1, func=WAIC)
+
+```
+
+#### Comparison individual/organisation pair
+
+Compare sentiments of individual/organisation pairs and provide a brief interpretation (e.g. CIs)
+
+
+## Question 2 - Website visits (between groups - Two factors)
+
+### Conceptual model
+Make a conceptual model underlying this research question
+
+![Conceptual model Twitter sentiment analysis](C:/Users/mirij/Downloads/experiment3.png)
+
+### Visual inspection
+Graphically examine the variation in page mean number of visits for the four different conditions
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(devtools)
+library(ggplot2)
+library(rcompanion)
+library(dplyr)
+library(gmodels)
+library(pander)
+library(car)
+
+setwd("C:/Users/mirij/Desktop") 
+
+webvisit<- read.csv("webvisit2.csv")
+
+#levenes test
+pander(leveneTest(webvisit$pages, interaction(webvisit$version , webvisit$portal)),
+caption = "Levenes Test on homogeneity of variance accross 4 conditions")
+
+ #l test found significant diff btw the 4 group (pvalue) 
+
+       #l test found significant diff btw the 4 group (pvalue) 
+#Together this created a two by two experiment, where participants were assigned to 4
+#factor version&portal
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+webvisit$versionF <- factor(webvisit$version, levels=c(0,1), labels = c(0,1))
+webvisit$portalF <- factor(webvisit$portal, levels=c(0,1), labels = c(0,1))
+
+bar_mean_var <- ggplot(webvisit, aes(versionF , pages, fill = portalF))
+bar_mean_var + stat_summary(fun = mean, geom = "bar", position="dodge")
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+bar_mean_var <- ggplot(webvisit, aes(portalF , pages, fill = versionF))
+bar_mean_var + stat_summary(fun = mean, geom = "bar", position="dodge")
+
+```
+
+The two figures shows the mean page visit number for each condition. We observe a significant difference between consumers and companies entries in the new website version condition. Similarly there is a higher difference in page visit means between new and old website version entries for the condition where the portal is a company portal.
+
+### Frequentist Approach
+
+#### Model analysis
+Conduct a model analysis, to examine the added values of adding 2 factors and interaction between the factors in the model to predict page visits, and include brief interpretation of the results.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+model0 <- glm(pages ~ 1 , family='poisson', data = webvisit, na.action = na.exclude)
+model1 <- glm(pages ~ versionF , family='poisson', data = webvisit, na.action = na.exclude)
+model2 <- glm(pages ~ portalF , family='poisson', data = webvisit, na.action = na.exclude)
+model3 <- glm(pages ~ versionF + portalF ,family='poisson',  data = webvisit, na.action = na.exclude)
+model4 <- glm(pages ~ versionF + portalF + versionF:portalF ,family='poisson', data = webvisit, na.action = na.exclude)
+
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model0,model1,test="Chi"),
+       caption = "Version as main effect on visited page count")
+
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model0,model2,test="Chi"),
+       caption = "Portal as main effect on visited page count")
+
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model3,model4,test="Chi"),
+       caption = "Interaction effect on top of two main effects(portal and version)")
+
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model4,test="Chi"),caption="Effect of version, portal and interaction effect on number of pages visited ")
+
+
+```
+
+The extension made by both model 1 and model 2  that take version and portal as main effects respectively show
+improvement over the intercept model with significant p values. Furthermore model 4 takes the interaction of the two main effects version and portal on top of the two main effects. Extension made by model 4 shows improvement over model 3 with a significant p value. This justifies further exploration of model 4.   
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(AICcmodavg)
+models <-list(model0, model1, model2, model3, model4)
+model.names <-c("model0","model1","model2","model3","model4")
+pander(aictab(cand.set = models, modnames=model.names)) #model4 is best
+
+```
+From this table we can see that the best model is model 4, the interaction model – the model that includes both portal and version parameters as well as their interactions (pages ~ version + portal + version:portal). In this case, model 4 is the best model as it contains more than 99% of the total explanation that can be found in the full set of models and has the  lowest AIC score. The next-best model carries much less than 1% of the cumulative model weight.  
+
+#### Assumption analysis
+For the best fitting model, examine graphically the distribution of the residuals. Also examine the residuals of the same model but then assuming a Gaussian distribution for the number of page visits. Give a brief interpretation about Poisson and Gaussian distribution assumption. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+hist(resid(model4))
+
+```
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+model4_gaussian <- glm(pages ~ versionF + portalF + versionF:portalF ,family='gaussian', data = webvisit, na.action = na.exclude)
+hist(resid(model4_gaussian))
+```
+The histograms of residuals for both gaussian and poisson distribution assumptions appear roughly normally distributed. This implies that for both cases, the normal distribution of error assumptions are valid. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+plot(model4)
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+plot(model4_gaussian)
+```
+
+For both gaussian and poisson assumptions, residuals are mostly fitted on y=x line on Normal Q-Q plots. There is slightly more divergence in the tails of the fixed line on the Normal Q-Q plot for both poisson assumption compared to the gaussian.  
+
+#### Simple effect analysis
+If the analysis shows a significant two-way interaction effect, conduct a Simple Effect analysis to explore this interaction effect in more detail.It helps first to look at the means of different conditions in a figure. Provide brief interpretation of the results.
+
+The model analysis showed a significant two-way interaction effect on top of the significant main effects version and portal. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+webvisit$simpeff <- interaction(webvisit$portalF, webvisit$versionF)
+levels(webvisit$simpeff) 
+
+contrastOld <-c(1,-1,0,0) 
+contrastNew <-c(0,0,1,-1) 
+
+SimpleEff <- cbind(contrastOld,contrastNew)
+contrasts(webvisit$simpeff) <- SimpleEff
+
+simpleEffectModel <-glm(pages ~ simpeff , family="poisson", data = webvisit, na.action = na.exclude) 
+pander(summary.glm(simpleEffectModel))
+```
+A significant difference can be found in result contastOld and contrast Complex.Also, the difference between two contrasts shown in simpeff row is also displays a significant difference. 
+
+#### Report section for a scientific publication
+
+
+### Bayesian Approach
+
+#### Model description
+
+Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown). Assume Poisson distribution for the number of page visits. Justify the priors.
+
+
+
+$pages \sim Pois(\lambda)$ [likelihood]
+
+$\log(lambda) = a + b\times version + c\times portal + d\times portal\times version$  [linear model]
+
+$a \sim Norm(10, 5)$ [$a$ prior]
+
+$b,c,d \sim uniform(0, 1)$ [$b$,$c$,$d$  priors]
+
+#### Model comparison
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE,results='hide',cache=TRUE}
+wvbayes <- subset(webvisit, select = c(pages,version, portal ))
+wvbayes$portalN <- as.numeric(wvbayes$portal)
+wvbayes$versionN <- as.numeric(wvbayes$version)
+
+library(rethinking)
+
+m0 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a,
+    a ~ dnorm(10,5)
+  ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
+)
+m1 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + b*versionN,
+    a ~ dnorm(10,5),
+    b ~ dunif(0, 1)
+  ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
+)
+m2 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + c*portalN,
+    a ~ dnorm(10,5),
+    c ~ dunif(0, 1)
+  ), data = wvbayes,iter = 2000, chains = 4, cores = 4
+)
+
+m3 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + b*versionN + c*portalN,
+    a ~ dnorm(10,5),
+    b ~ dunif(0, 1),
+    c ~ dunif(0, 1)
+  ), data = wvbayes,iter = 2000, chains = 4, cores = 4
+)
+
+m4 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + b*versionN + c*portalN + d*versionN*portalN,
+    a ~ dnorm(10,5),
+    c(b,c,d) ~ dunif(0, 1)
+  ), data = wvbayes,iter = 2000, chains = 4, cores = 4
+)
+
+
+```
+
+```{r}
+compare(m0,m1,m2,m3,m4)
+
+```
+The compare function shows that m4 has the smallest WAIC value, thus the best out-of-sample fit. 
+
+```{r}
+precis(m4,prob= .95)
+
+```
+Looking at 95% credible intervals of the parameters of model 4, 
+The credible values of coefficient b for version predictor, coefficient c portal predictor and coefficient d interaction predictor are not including null. 
+# Part 3 - Multilevel model
+
+## Visual inspection
+Use graphics to inspect the distribution of the score, and relationship between session and score
+
+
+```{r}
+#include your code and output in the document
+```
+
+## Frequentist approach
+
+### Multilevel analysis
+Conduct multilevel analysis and calculate 95% confidence intervals thereby assuming a Gaussian distribution for the scores, determine:
+
+* If session has an impact on people score
+* If there is significant variance between the participants in their score
+
+
+```{r}
+#include your code and output in the document
+```
+
+### Report section for a scientific publication
+Write a small section for a scientific publication, in which you report the results of the analyses, and explain the conclusions that can be drawn.
+
+## Bayesian approach
+
+### Model description
+
+Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown).  Assume a Gaussian distribution for the scores. Justify the priors.
+
+### Model comparison
+
+Compare models with with increasing complexity. 
+
+```{r}
+#include your code and output in the document
+```
+
+### Estimates examination
+
+Examine the estimate of parameters of the model with best fit, and provide a brief interpretation.
+
+
+```{r}
+#include your code and output in the document
+```
+
+
