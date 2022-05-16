@@ -648,14 +648,25 @@ precis(m4,prob= .95)
 ```
 Looking at 95% credible intervals of the parameters of model 4, 
 The credible values of coefficient b for version predictor, coefficient c portal predictor and coefficient d interaction predictor are not including null. 
+
 # Part 3 - Multilevel model
 
 ## Visual inspection
 Use graphics to inspect the distribution of the score, and relationship between session and score
-
-
 ```{r}
 #include your code and output in the document
+
+# setwd("C:/Users/mirij/Desktop") 
+
+set <- read.csv("set1.csv")
+
+# Distribution of the score
+boxplot(set$score)
+
+# Relationship between session and score
+boxplot(score ~ session, data=set, main="Score",
+xlab="Session", ylab="Score over sessions")
+
 ```
 
 ## Frequentist approach
@@ -669,6 +680,7 @@ Conduct multilevel analysis and calculate 95% confidence intervals thereby assum
 
 ```{r}
 #include your code and output in the document
+
 ```
 
 ### Report section for a scientific publication
