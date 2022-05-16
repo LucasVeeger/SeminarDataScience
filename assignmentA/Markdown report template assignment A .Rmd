@@ -257,7 +257,6 @@ Graphically examine the mean and distribution sentiments of tweets for each indi
 
 ```{r}
 #include your code and output in the document
-
 energyTransition<-semFrame[semFrame$Candidate=="Energy Transition",]
 #print(energyTransition)
 hist(energyTransition$score, xlab="score")
@@ -285,8 +284,11 @@ cat("Median=", center, "\n", "MAD=", spread, "\n")
 result <- list(center=center,spread=spread)
 return(result)
 }
+print("Renewable energy:")
 d<-mysummary(renewableEnergy$score, FALSE)
+print("Sustainable energy:")
 d<-mysummary(sustainableEnergy$score, FALSE)
+print("Energy transition:")
 d<-mysummary(energyTransition$score, FALSE)
 
 boxplot(score ~ Candidate, data=semFrame, main="Sentiment distribution in tweets",
@@ -295,7 +297,7 @@ xlab="Organisation", ylab="score")
 ```
 The mean for renewable Energy and sustainable Energy are close to each other. Whereas the mean for energy Transition is significantly lower. The standard deviations for all organisations are similar.
 
-From the boxplot we can see that for all three topics, most of the tweets have a sentiment around 0.
+From the boxplot we can see that for all three topics, most of the tweets have a median sentiment around of 0.
 
 ### Frequentist approach
 
@@ -305,55 +307,29 @@ Use a linear model to analyze whether the knowledge to which individual/organisa
 ```{r}
 #include your code and output in the document
 
-#library(gmodels) #CrossTable
+model0<- lm(score ~ 1, data = semFrame, na.action = na.exclude) #model without predictor
+model1 <- lm(score ~ Candidate, data = semFrame, na.action = na.exclude) #model with predictor
 
-#CrossTable(semFrame$score, semFrame$Candidate, prop.r=FALSE, prop.c = FALSE,
-#prop.t = FALSE,
-#prop.chisq=FALSE, format = "SPSS",
-#fisher = FALSE, chisq = TRUE,
-#expected = FALSE, sresid = FALSE)
-
-# print(energyTransition)
-# print(renewableEnergy)
-# print(sustainableEnergy)
-
-#From lecture slides
-
-# Model0 <- lm(score ~ 1, data = lec7dsub)
-# model1 <- lm(score ~ Feedback, data = lec7dsub)
-# anova(model0,model1, test = "F")
-      
-#From markdown
-# For model without predictor, should we import the same amount of tweets but not related to the topics of Energy transition and then make a comparison?
-model0<- lm(score ~ 1, data = semFrame) #model without predictor
-model1 <- lm(score ~ Candidate, data = semFrame) #model with predictor
-
-# model2 <- lm(score ~ Candidate, data = sustainableEnergy) #model with predictor
-# model3 <- lm(score ~ Candidate, data = renewableEnergy) #model with predictor
-# model4 <- lm(score ~ Candidate, data = energyTransition) #model with predictor
-# 
-# pander(anova(model0, model2, test = 'F'),
-# caption = "Compare if sustainableEnergy provide better fit than no knowledge")
-# pander(anova(model0, model3, test = 'F'),
-# caption = "Compare if renewableEnergy provide better fit than no knowledge")
-# pander(anova(model0, model4, test = 'F'),
-# caption = "Compare if energyTransition provide better fit than no knowledge")
-# install.packages('pander')
 library(pander)
-pander(anova(model0, model1, test = 'F'),
+pander(anova(model0, model1),
 caption = "Compare if knowledge provide better fit than no knowledge")
 
 pander(anova(model1),
 caption = "Effect of organisation type on post test score")
 
+pander(summary(model1))
 
-summary(model0)
-summary(model1)
+library(car)
+pander(Anova(model1))
 
 ```
-The P value is significantly smaller than 0.05, thus we can accept the null hypothesis. Thus, the organisation gives insight into the sentiment.
-From the last column in the summary model, we see that the p-value for sustainableEnergy and renewableEnergy is larger than 0.05. Thus the organisation has significant impact on the output score.
-R-squared is 0.04156, which means that 4% percent of the variance in the observed data can be explained by the model, which is very small. 86% cannot be explained by the model. 
+
+<!-- The p-value is significantly smaller than 0.05, thus we can reject the null hypothesis. Thus, the organisation gives insight into the sentiment. -->
+<!-- From the last column in the summary model, we see that the p-value for sustainableEnergy and renewableEnergy is larger than 0.05. Thus the organisation has no significant impact on the output score. -->
+<!-- R-squared is 0.04156, which means that 4% percent of the variance in the observed data can be explained by the model, which is very small. 86% cannot be explained by the model. -->
+The F-value in an ANOVA is calculated as: variation between sample means / variation within the samples.
+The higher the F-value in an ANOVA, the higher the variation between sample means relative to the variation within the samples. The higher the F-value, the lower the corresponding p-value.
+The p-value is 0.0637. This means the difference in sentiment between the organisations would happen 6.735% of the time. As the difference is larger than 0.05, the difference is not statistically significant and is likely due to chance. 
 
 #### Post Hoc analysis
 If a model that includes the individual/organisation is better in explaining the sentiments of tweets than a model without such predictor, conduct a post-hoc analysis with e.g. Bonferroni correction, to examine which of individual/organisation tweets differ from the other individual/organisation tweets. Provide interpretation of the results
@@ -361,37 +337,31 @@ If a model that includes the individual/organisation is better in explaining the
 ```{r}
 #include your code and output in the document
 
+pairwise.t.test(semFrame$score, semFrame$Candidate, paired = FALSE, p.adjust.method = "bonferroni")
+
+# plot(model1)
+
+pander(tapply(semFrame$score, semFrame$Candidate, shapiro.test)) # test normaliy of each level
+
+leveneTest(semFrame$score, semFrame$Candidate)
+
 ```
+The p-values corrected with Bonferroni show that the p-values are still above 0.05 between all groups. Therefore, no organisation is better in explaining the sentiment of tweets.
 
 #### Report section for a scientific publication
 Write a small section for a scientific publication (journal or a conference), in which you report the results of the analyses, and explain the conclusions that can be drawn in a format commonly used by the scientific community Look at Brightspace for examples papers and guidelines on how to do this. 
 
-Tweets without the knowledge of each organisation did have significant (t(597) = 12.94, p=3.141e-06) different post test scores (M = 0.395, SD = 0.03145) than the tweets with knowledge of each organisation (energyTransition: M = 0.17500 , SD = 0.8047441), (sustainableEnergy: M = 0.53, SD = 0.7153029) and (renewableEnergy: M = 0.48, SD = 0.7432105). 
+<!-- Tweets without the knowledge of each organisation did have significant (t(597) = 12.94, p=3.141e-06) different post test scores (M = 0.395, SD = 0.03145) than the tweets with knowledge of each organisation (energyTransition: M = 0.17500 , SD = 0.8047441), (sustainableEnergy: M = 0.53, SD = 0.7153029) and (renewableEnergy: M = 0.48, SD = 0.7432105).  -->
+A Linear Model analysis was conducted to test the difference between cohorts on the organisations. The results found a significant effect (F(2, 597)=2.7101, p < 0.06735) for the cohorts on the organisations.
 
 ### Bayesian Approach
 
 #### Model description
 
 Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown). Assume a Gaussian distribution for the tweet’s sentiments rating. Justify the priors.
-```{r}
-# devtools::install_github("rasmusab/bayesian_first_aid")
-# library(BayesianFirstAid)
-# 
-# fit1<- bayes.t.test(renewableEnergy$score,energyTransition$score)
-# show(fit1)
-# plot(fit1)
-
-# fit2 <- bayes.t.test(renewableEnergy$score,sustainableEnergy$score)
-# show(fit2)
-# plot(fit2)
-
-# fit3 <- bayes.t.test(energyTransition$score,sustainableEnergy$score)
-# show(fit3)
-# plot(fit3)
-```
 
 Null model:
-```{r, warning=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
 library(rethinking)
 
 m0 <-map2stan(
@@ -404,14 +374,13 @@ m0 <-map2stan(
 )
 ```
 
-Model that includes parameter estimation for the organisations:
-```{r, warning=FALSE}
+Model model that includes organisation as a factor:
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
 m1 <-map2stan(
   alist(
   score ~ dnorm(mu, sigma),
-  mu <- a + b*Candidate,
-  a ~ dnorm(0, 1),
-  b ~ dnorm(0,1),
+  mu <- a[Candidate],
+  a[Candidate] ~ dnorm(0, 1),
   sigma ~ dnorm(0, 1)
   ), data = semFrame ,iter = 100, chains = 4, cores = 4
 )
@@ -425,23 +394,23 @@ Conduct model analysis and provide brief interpretation of the results
 
 ```{r}
 #include your code and output in the document
+ 
+compare(m0, m1, func=WAIC)
 
-precis(m0, prob = .95)
-
-precis(m1, prob = .95)
-
-PSIS(m0)
-WAIC(m0)
-
-# compare(m0, m1, func=PSIS)
-# 
-# compare(m0, m1, func=WAIC)
-
+precis(m1, depth=2, prob = .95)
 ```
+
+The WAIC for model 1 is smaller than the WAIC of model 0, thus we can say that model 1 has improved from model 0. 
 
 #### Comparison individual/organisation pair
 
 Compare sentiments of individual/organisation pairs and provide a brief interpretation (e.g. CIs)
+
+```{R}
+
+precis(m1, depth=2, prob = .95)
+```
+EnergyTransition has the most distinct mean compared to sustainableEnergy and renewableEnergy.
 
 
 ## Question 2 - Website visits (between groups - Two factors)
