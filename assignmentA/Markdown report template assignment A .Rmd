@@ -30,10 +30,10 @@ Energy transition does not only encompass creating new forms of energy, it also 
 
 ## The theory underlying the research  
 <!-- (Max 250 words) Preferable based on theories reported in literature-->
-How engaged are consumers to consider their footprint when traveling midrange distances. There is growing awareness nowadays about the fact that flying is very harmful for the environment (e.g. flight shame), and that taking the train is a much better alternative in terms of energy consumption. The current problem in Europe is that train traveling has 2 large downsides compared to the more emissive flights. 
+How engaged are consumers to consider their footprint when traveling midrange distances (500-2500km, e.g. Amsterdam to Paris is ~500km, Amsterdam to Lissabon is ~2250km). There is growing awareness nowadays about the fact that flying is very harmful to the environment (e.g. flight shame), and that taking the train is a much better alternative in terms of energy consumption. The current problem in Europe is that train traveling has 2 large downsides compared to the highly emissive flight transports. 
     1) It takes a lot longer, often including different connections that have to be completed. 
-    2) It is way more expensive. 
-The first drawback is obvious and will always be existent compared to flying, but it can be reduced. However, the monetary drawback is one that feels counter-intuitive, and one would say it should be possible to facilitate cheaper land transport compared to air transport. But would consumers go for the land alternative given the prices are (more) equal, and would they be making these decisions over environmental reasons or other possible ones (e.g. more comfort?). 
+    2) It is more expensive. 
+The first drawback is obvious and will always be existent compared to flying, but it can be reduced. However, the monetary drawback is one that feels counter-intuitive, and one would say it should be possible to facilitate cheaper land transport compared to air transport. But would consumers go for the land alternative given the prices are (more) equal, and would they be making these decisions over environmental reasons or other possible ones (e.g. more comfort?). Also, given a situation where a carbon tax would exist over transport, the carbon emissions would make flying more expensive than any train journey (https://www.dw.com/en/trains-vs-planes-whats-the-real-cost-of-travel/a-45209552).
 
 ## Research questions 
 <!-- The research question that will be examined in the experiment (or alternatively the hypothesis that will be tested in the experiment) -->
@@ -65,33 +65,40 @@ Taking the most relevant variables in consideration: we conceptualize the follow
 ## Experimental Design 
 <!-- Note that the study should have a true experimental design-->
 
-Subjects are divided in 4 groups
+Subjects are divided in 6 groups.
+Reference price y1 is taken as the industry price for flying to a certain distance increased by some margin that corrects for the heavy tax priviliges that are currently enjoyed by flight operators (assuming these will disappear at some point in the future). A train price increase factor of 1.5 is used based on the article  stating UK train travel is around 50% more expensive than air travel (https://www.theguardian.com/environment/2021/jul/14/trains-far-greener-but-much-more-costly-than-planes-analysis-finds). A price decrease factor is determined at 0.75 by the idea that is hard to make railway transport inherently much cheaper (note air transport is mostly cheap for its tax privileges, e.g. no tax on fuel), and it is mostly to see whether an price advantage is extra decisive for subjects. 
 
 - Subject from group 1 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
-- Subject from group 2 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1+y1, or don't travel.
-- Subject from group 3, after watching a video about the environmental benefits of train transport instead of air transport, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
-- Subject from group 4, after watching a video about the environmental benefits of train transport instead of air transport, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1+y1, or don't travel.
+- Subject from group 2 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 1.5*y1, or don't travel.
+- Subject from group 3 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 0.75*y1, or don't travel.
+- Subject from group 4, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
+- Subject from group 5, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 1.5*y1, or don't travel.
+- Subject from group 6, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 0.75*y1, or don't travel.
 
 
 ## Experimental procedure 
 <!-- Describe how the experiment will be executed step by step -->
 The experiment can be executed decentralized in a real setting (ensuring validity) by setting up a collaboration with a ticket provider, which provides a portal where both train and plane tickets can be bought (probably for a limited amount of trajectories that are properly reachable by both air and train travel (e.g. the destination should not require some extensive other form of travel). 
 
-Once on the platform, subjects will have to fill in a small questionnaire to document some characteristics (e.g. environmental focus and financial means). The questionnaire will start with a paragraph explaining data is anonymously gathered through this portal for experimental reasons, and the prices available might be influenced unexpectedly and might not reflect realistic prices. After filling in the questionnaire, the subject either shown a video addressing the urgency of environmental awareness, or it is not shown any video. The underlying algorithm can decide this, preventing a selection bias. The subject is then allowed to search for journeys, for which it is presented always the train and air options together, with prices based on the experimental design, again selected by the algorithm to ensure the validity of the data collection.  
+Once on the platform, subjects will have to fill in a small questionnaire to document some characteristics (e.g. environmental focus and financial means). The questionnaire will start with a paragraph explaining data is anonymously gathered through this portal for experimental reasons, and the prices available might be influenced unexpectedly and might not reflect realistic prices. After filling in the questionnaire, the subject either a video is shown addressing the urgency of environmental awareness, or no video is shown. The underlying algorithm can decide this, preventing a selection bias. The subject is then allowed to search for journeys, for which it is presented always the train and air options together in the same window, with prices based on the experimental design, again selected by the algorithm to ensure the validity of the data collection. The location of the different options content within the window can be varied to reduce the risk of decreasing the reliability. 
+
 
 
 ## Measures
 <!-- Describe the measure that will be used -->
 
-E.g. Using screen monitoring HotJar
+The major measure is travel choice (w.r.t. price, duration and the optional environmental awareness content).
+Smaller measures could be decision time, window activity (e.g. using screen monitoring software like Hotjar), moment of decision.
+
 
 ## Participants
 <!-- Describe which participants will recruit in the study and how they will be recruited -->
-Through social media it is marketed to all kinds of individuals, and through the study it is monitored what target groups require extra input so that marketing focus can be adjusted. The goal is to include any type of person that considers traveling to destinations by air. The participants get real tickets through the collaboration with the ticket provider, so possibly a hype might start around the platform. 
+Through social media it is marketed to all kinds of individuals, and through the study it is monitored what target groups require extra input so that marketing focus can be adjusted. The goal is to include any type of person that considers traveling to destinations by air. The participants get real tickets through the collaboration with the ticket provider, so possibly a hype from certain groups of people might start around the platform which could prevented by introducing an application combined with random subject selection for such groups. 
 
 
 ## Suggested statistical analyses
 Describe the statistical test you suggest to care out on the collected data
+TODOOOOOO
 
 # Part 2 - Generalized linear models
 
@@ -669,6 +676,7 @@ xlab="Session", ylab="Score over sessions")
 
 ```
 
+
 ## Frequentist approach
 
 ### Multilevel analysis
@@ -680,6 +688,33 @@ Conduct multilevel analysis and calculate 95% confidence intervals thereby assum
 
 ```{r}
 #include your code and output in the document
+library(nlme)
+# m <- lme(score ~ session,random = ~subject|id_c,data=set, method="ML")
+
+
+# random intercept
+m0 <- lme(score ~ 1,random = ~1 | subject,method = "ML",data=set)
+summary(m0)
+
+# fixed effect 
+m1 <- lme(score ~ session,random = ~1 | subject,method = "ML",data=set)
+summary(m1)
+
+library(pander)
+pander(anova(m0, m1),
+caption = "Compare if knowledge provide better fit than no knowledge")
+
+pander(anova(m0),
+caption = "Effect of organisation type on post test score")
+
+pander(summary(m1))
+
+library(car)
+pander(Anova(m1))
+
+intervals(m0, level = 0.95)
+intervals(m1,level = 0.95)
+
 
 ```
 
@@ -698,6 +733,10 @@ Compare models with with increasing complexity.
 
 ```{r}
 #include your code and output in the document
+library(rethinking)
+
+
+
 ```
 
 ### Estimates examination
