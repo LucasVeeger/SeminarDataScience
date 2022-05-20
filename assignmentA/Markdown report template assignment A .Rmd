@@ -1,6 +1,6 @@
 ---
 title: "Report Template coursework assignment A - 2021-2022"
-author: "Sara Hacipoglu (5569206), Mirijam Zhang (4660129), Lucas (4459628)"
+author: "Sara Hacipoglu (5569206), Lucas (4459628)"
 date: "24/03/2022"
 output:
   html_document:
@@ -107,7 +107,7 @@ TODOOOOOO
 ### Conceptual model
 Make a conceptual model for the following research question: Is there a difference in the sentiment of the tweets related to the different individuals/organisations?
 
-![Conceptual model Twitter sentiment analysis](C:/Users/mirij/Downloads/experiment2.png)
+![Conceptual model Twitter sentiment analysis](C:/Users/mirij/Downloads/question2.png)
 
 ### Collecting tweets, and data preparation
 Include the annotated R script (excluding your personal Keys and Access Tokens information), but put echo=FALSE, so code is not included in the output pdf file.
@@ -117,7 +117,7 @@ Include the annotated R script (excluding your personal Keys and Access Tokens i
 
 #during writing you could add "eval = FALSE",  kntr will than not run this code chunk (take some time do)
 # getwd()
-# setwd("C:/Users/mirij/Desktop") 
+setwd("C:/Users/mirij/Desktop") 
 # apple , note use / instead of \, which used by windows
 
 
@@ -421,7 +421,6 @@ EnergyTransition has the most distinct mean compared to sustainableEnergy and re
 
 
 ## Question 2 - Website visits (between groups - Two factors)
-
 ### Conceptual model
 Make a conceptual model underlying this research question
 
@@ -440,7 +439,8 @@ library(gmodels)
 library(pander)
 library(car)
 
-setwd("C:/Users/mirij/Desktop") 
+setwd("C:/Users/mirij/Desktop")
+# setwd("C:/Users/ilgin/OneDrive/Documents/GitHub/SeminarDataScience/assignmentA")
 
 webvisit<- read.csv("webvisit2.csv")
 
@@ -448,13 +448,10 @@ webvisit<- read.csv("webvisit2.csv")
 pander(leveneTest(webvisit$pages, interaction(webvisit$version , webvisit$portal)),
 caption = "Levenes Test on homogeneity of variance accross 4 conditions")
 
- #l test found significant diff btw the 4 group (pvalue) 
-
-       #l test found significant diff btw the 4 group (pvalue) 
-#Together this created a two by two experiment, where participants were assigned to 4
-#factor version&portal
 
 ```
+Levenes test found significant difference between the 4 conditions with a p-value less than 0.05. The two by two experiment consists of factors version and portal. 
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 webvisit$versionF <- factor(webvisit$version, levels=c(0,1), labels = c(0,1))
@@ -465,13 +462,10 @@ bar_mean_var + stat_summary(fun = mean, geom = "bar", position="dodge")
 
 ```
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-bar_mean_var <- ggplot(webvisit, aes(portalF , pages, fill = versionF))
-bar_mean_var + stat_summary(fun = mean, geom = "bar", position="dodge")
 
-```
+The two figures shows the mean page visit number for each condition. We observe a significant mean difference of greater than 10 in page visit between consumers and companies portal entries when website version condition is set to new. The observed difference of means is less between consumer and company portal conditions when version is set to old. 
 
-The two figures shows the mean page visit number for each condition. We observe a significant difference between consumers and companies entries in the new website version condition. Similarly there is a higher difference in page visit means between new and old website version entries for the condition where the portal is a company portal.
+Similarly there is a higher difference in page visit means between new and old website version entries for the condition where the portal is a company portal.
 
 ### Frequentist Approach
 
@@ -489,31 +483,37 @@ model4 <- glm(pages ~ versionF + portalF + versionF:portalF ,family='poisson', d
 ```
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
-pander(anova(model0,model1,test="Chi"),
-       caption = "Version as main effect on visited page count")
+anova(model0,model1,test="Chisq")
+       #caption = "Version as main effect on visited page count")
 
 ```
+The p-value is 2.2e-16, that is less than 0.01.  This implies we reject the null hypothesis in favor that model0 is better, in favor of model1. Compared to model0 which only takes the intercept, model2 that takes version as a factor is a better fit. 
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
-pander(anova(model0,model2,test="Chi"),
+pander(anova(model0,model2,test="Chisq"),
        caption = "Portal as main effect on visited page count")
 
 ```
-
+The p-value is 1.06e-102, that is less than 0.01.  This implies we reject the null hypothesis that model0 models is better, in favor of model2. Compared to model0 which only takes the intercept, model2 that takes portal as a factor is a better fit. 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 pander(anova(model3,model4,test="Chi"),
        caption = "Interaction effect on top of two main effects(portal and version)")
 
 ```
+The p-value is 3.24e-191, that is less than 0.01.  This implies we reject the null hypothesis that model3 is better, in favor of model4. Compared to model3 which takes the both version and portal as predictors, model4 that takes both as well as their interaction effect is a better fit. 
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
-pander(anova(model4,test="Chi"),caption="Effect of version, portal and interaction effect on number of pages visited ")
+pander(anova(model4,test="Chisq"),caption="Effect of version, portal and interaction effect on number of pages visited ")
 
 
 ```
 
 The extension made by both model 1 and model 2  that take version and portal as main effects respectively show
-improvement over the intercept model with significant p values. Furthermore model 4 takes the interaction of the two main effects version and portal on top of the two main effects. Extension made by model 4 shows improvement over model 3 with a significant p value. This justifies further exploration of model 4.   
+improvement over the intercept model with significant p values. Furthermore model 4 takes the interaction of the two main effects version and portal on top of the two main effects. Extension made by model 4 shows improvement over model 3 with a significant p value. This justifies further exploration of model 4. 
+
+Two-way Anova results of model4 indicate a p-value of 3.24e-191 for the interaction between version and portal. This value is statistically significant at alpha level 0.05. Similarly, the p-values for the effect of version and portal are statistically significant.
+These results indicate that version, portal and their interaction factors have a statistically significant effect on web page visit count. 
+
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 library(AICcmodavg)
@@ -522,7 +522,7 @@ model.names <-c("model0","model1","model2","model3","model4")
 pander(aictab(cand.set = models, modnames=model.names)) #model4 is best
 
 ```
-From this table we can see that the best model is model 4, the interaction model – the model that includes both portal and version parameters as well as their interactions (pages ~ version + portal + version:portal). In this case, model 4 is the best model as it contains more than 99% of the total explanation that can be found in the full set of models and has the  lowest AIC score. The next-best model carries much less than 1% of the cumulative model weight.  
+From the AIcc analysis we can see that the best model is model 4, the interaction model – the model that includes both portal and version parameters as well as their interactions (pages ~ version + portal + version:portal). In this case, model 4 is the best model as it contains more than 99% of the total explanation that can be found in the full set of models and has the  lowest AIC score. The next-best model carries much less than 1% of the cumulative model weight.  
 
 #### Assumption analysis
 For the best fitting model, examine graphically the distribution of the residuals. Also examine the residuals of the same model but then assuming a Gaussian distribution for the number of page visits. Give a brief interpretation about Poisson and Gaussian distribution assumption. 
@@ -536,17 +536,20 @@ hist(resid(model4))
 model4_gaussian <- glm(pages ~ versionF + portalF + versionF:portalF ,family='gaussian', data = webvisit, na.action = na.exclude)
 hist(resid(model4_gaussian))
 ```
-The histograms of residuals for both gaussian and poisson distribution assumptions appear roughly normally distributed. This implies that for both cases, the normal distribution of error assumptions are valid. 
+The histograms of residuals for both Gaussian and Poisson distribution assumptions appear roughly normally distributed. This implies that for both cases, the normal distribution of error assumptions are valid. The residual value has more variance in the Gaussian model as they range from (-15,15). Residuals in Poisson model histogram show lower variance with values in the range (-3,3), suggesting Poisson assumption could be more suitable for this dataset. 
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 plot(model4)
+
 ```
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 plot(model4_gaussian)
+
+
 ```
 
-For both gaussian and poisson assumptions, residuals are mostly fitted on y=x line on Normal Q-Q plots. There is slightly more divergence in the tails of the fixed line on the Normal Q-Q plot for both poisson assumption compared to the gaussian.  
+For both Gaussian and Poisson assumptions, residuals are mostly fitted on y=x line on Normal Q-Q plots. There is slightly more divergence in the tails of the fixed line on the Normal Q-Q plot for Poisson assumption compared to the Gaussian. 
 
 #### Simple effect analysis
 If the analysis shows a significant two-way interaction effect, conduct a Simple Effect analysis to explore this interaction effect in more detail.It helps first to look at the means of different conditions in a figure. Provide brief interpretation of the results.
@@ -566,9 +569,18 @@ contrasts(webvisit$simpeff) <- SimpleEff
 simpleEffectModel <-glm(pages ~ simpeff , family="poisson", data = webvisit, na.action = na.exclude) 
 pander(summary.glm(simpleEffectModel))
 ```
-A significant difference can be found in result contastOld and contrast Complex.Also, the difference between two contrasts shown in simpeff row is also displays a significant difference. 
+A significant difference can be found in result contrastOld and contrastComplex.When page visit counts are compared with the old version contrast, we observe a significant difference between customer and company portal implementations. Similarly, when page visit counts are compared with new version contrast, a significant difference between customer and company portal implementations can be observed. 
 
 #### Report section for a scientific publication
+
+A linear model assuming Poisson distribution for website page visit count was fitted on the impact of number of pages visited on the webserver of company X, taking website version and website portal entry type as independent variables, and including a two-way interaction between these variables. 
+
+The analysis found a significant main effect (X2(1, 998) = 2165, p. < 0.01) for the website version, significant main effect(X2(1, 997) = 1805, p. < 0.01)  for website portal entry. The analysis also found a significant two-way interaction effect ( F (1, 996) = 934.5, p.< 0.01) between these two variables.
+
+A simple Effect analysis further examined the two-way interaction. It revealed a significant (z = 16.18, p. < 0.01)
+difference for portal entry type of the website with the old website version, as well as a significant effect (z = -30.32,
+p.<0.01) was found for portal entry type with the new website version implementation.
+
 
 
 ### Bayesian Approach
@@ -583,14 +595,18 @@ $pages \sim Pois(\lambda)$ [likelihood]
 
 $\log(lambda) = a + b\times version + c\times portal + d\times portal\times version$  [linear model]
 
-$a \sim Norm(10, 5)$ [$a$ prior]
+$a \sim Norm(25, 25)$ [$a$ prior]
 
-$b,c,d \sim uniform(0, 1)$ [$b$,$c$,$d$  priors]
+$b,c \sim uniform(0, 1)$ [$b$,$c$ priors]
+$d \sim Norm(0, 10)$ [$d$  prior]
+
+
+For parameter a, which represents the intercept, we expect the parameter to be anywhere from 0 to 50 as page visit values vary in the data. As these are not hard bounds, we will be using normal(25,25). On the other hand, parameters b and c represent portal and version factors, which are known to be values either 0 or 1. Therefore, we prefer a uniform prior for these parameters. Parameter d reflects the interaction effect for portal and version factors, for which we preferred a normal(0,10) weakly informative prior, as we do not know about the distribution for the interactive effect parameter 
 
 #### Model comparison
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE,results='hide',cache=TRUE}
+```{r message=FALSE, warning=FALSE, cache=TRUE, include=FALSE, results='hide'}
 wvbayes <- subset(webvisit, select = c(pages,version, portal ))
 wvbayes$portalN <- as.numeric(wvbayes$portal)
 wvbayes$versionN <- as.numeric(wvbayes$version)
@@ -601,14 +617,14 @@ m0 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a,
-    a ~ dnorm(10,5)
+    a ~ dnorm(25,25)
   ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
 )
 m1 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + b*versionN,
-    a ~ dnorm(10,5),
+    a ~ dnorm(25,25),
     b ~ dunif(0, 1)
   ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
 )
@@ -616,7 +632,7 @@ m2 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + c*portalN,
-    a ~ dnorm(10,5),
+    a ~ dnorm(25,25),
     c ~ dunif(0, 1)
   ), data = wvbayes,iter = 2000, chains = 4, cores = 4
 )
@@ -625,7 +641,7 @@ m3 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + b*versionN + c*portalN,
-    a ~ dnorm(10,5),
+    a ~ dnorm(25,25),
     b ~ dunif(0, 1),
     c ~ dunif(0, 1)
   ), data = wvbayes,iter = 2000, chains = 4, cores = 4
@@ -635,8 +651,10 @@ m4 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + b*versionN + c*portalN + d*versionN*portalN,
-    a ~ dnorm(10,5),
-    c(b,c,d) ~ dunif(0, 1)
+    a ~ dnorm(25,25),
+    b ~ dunif(0, 1),
+    c ~ dunif(0, 1),
+    d ~ dnorm(0, 10)
   ), data = wvbayes,iter = 2000, chains = 4, cores = 4
 )
 
@@ -653,8 +671,9 @@ The compare function shows that m4 has the smallest WAIC value, thus the best ou
 precis(m4,prob= .95)
 
 ```
-Looking at 95% credible intervals of the parameters of model 4, 
-The credible values of coefficient b for version predictor, coefficient c portal predictor and coefficient d interaction predictor are not including null. 
+Looking at 95% credible intervals of the parameters of model 4, the credible values of coefficient b for version predictor, coefficient c portal predictor and coefficient d interaction predictor are not including null. 
+As these interval do not contain the value zero, this leads to the rejection of the null hypothesis that coefficients b=0, c=0, d=0. 
+ 
 
 # Part 3 - Multilevel model
 
@@ -663,7 +682,7 @@ Use graphics to inspect the distribution of the score, and relationship between 
 ```{r}
 #include your code and output in the document
 
-# setwd("C:/Users/mirij/Desktop") 
+setwd("C:/Users/mirij/Desktop") 
 
 set <- read.csv("set1.csv")
 
@@ -685,41 +704,38 @@ Conduct multilevel analysis and calculate 95% confidence intervals thereby assum
 * If session has an impact on people score
 * If there is significant variance between the participants in their score
 
-
 ```{r}
 #include your code and output in the document
 library(nlme)
-# m <- lme(score ~ session,random = ~subject|id_c,data=set, method="ML")
-
-
 # random intercept
-m0 <- lme(score ~ 1,random = ~1 | subject,method = "ML",data=set)
-summary(m0)
+randomIntercept <- lme(score ~ 1,
+        data= set,
+        random = ~1|subject,
+        method = "ML",
+        na.action = na.exclude,
+        control = list(opt="optim"))
 
-# fixed effect 
-m1 <- lme(score ~ session,random = ~1 | subject,method = "ML",data=set)
-summary(m1)
+# fixed effect
+# session added as random slope
+scoreRI <-update(randomIntercept, .~. + session)
+# session now conditioned on person
+scoreRS <-update(scoreRI, random = ~session|subject)
 
-library(pander)
-pander(anova(m0, m1),
-caption = "Compare if knowledge provide better fit than no knowledge")
+ARModel <- update(scoreRS, correlation = corAR1(0, form = ~session|subject))
 
-pander(anova(m0),
-caption = "Effect of organisation type on post test score")
-
-pander(summary(m1))
-
-library(car)
-pander(Anova(m1))
-
-intervals(m0, level = 0.95)
-intervals(m1,level = 0.95)
-
+anova(randomIntercept, scoreRI, scoreRS, ARModel)
+summary(ARModel)
+# 
+# intervals(m0, level = 0.95)
+# intervals(m1,level = 0.95)
 
 ```
+SessionRI has the lowest AIC value and p-value compared to the randomIntercept.
+The Phi value from the Correlation Structure shows that session is significant for score value.
 
 ### Report section for a scientific publication
 Write a small section for a scientific publication, in which you report the results of the analyses, and explain the conclusions that can be drawn.
+
 
 ## Bayesian approach
 
@@ -734,8 +750,6 @@ Compare models with with increasing complexity.
 ```{r}
 #include your code and output in the document
 library(rethinking)
-
-
 
 ```
 
