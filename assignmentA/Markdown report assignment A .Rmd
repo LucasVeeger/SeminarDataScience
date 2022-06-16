@@ -8,7 +8,7 @@ output:
       fig_caption: true
       number_sections: true
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -25,21 +25,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ## The motivation for the planned research 
 <!-- (Max 250 words) -->
 
-Energy transition does not only encompass creating new forms of energy, it also concerns how energy is used. And as humans are its grand consumers, they also hold the power to decide where and how it is used.  
+Energy transition does not only encompass creating new forms of energy, it also concerns how energy is used. And as humans are its grand consumers, they also hold the power to decide where and how it is used. But the choice is not simple. Take the European transport situation, where low-cost air carriers dominate the human transport market (https://time.com/6108578/why-flying-is-more-expensive-than-taking-the-train/) despite the greatly connected railway infrastructure. The UK is an example on its own (https://www.theguardian.com/environment/2021/jul/14/trains-far-greener-but-much-more-costly-than-planes-analysis-finds), where domestic train fares seem to be 50% more expensive compared to plane fares. The US has a similar situation, but in a much wider stretched area, and on certain short connections there train travel financially wins over air travel (https://www.allianztravelinsurance.com/travel/flight/train-vs-plane.htm). India, a country that has relied on a sophisticated railway system for decades, experiences an ongoing shift to air travel because of lowering flight prices, combined with time, security and hygiene benefits. And in a lot of other exotic destinations (e.g. large parts of Latin America and Asia) the choice of transport is not really such a dilemma, with less developed railway systems and far more reliance on air transport as somewhat 'quick' way of travel. But given the environmental needs for a sustainable transport system, it would be wise to know how far people would be willing to go over land and for what price.   
 
 
 ## The theory underlying the research  
 <!-- (Max 250 words) Preferable based on theories reported in literature-->
-How engaged are consumers to consider their footprint when traveling midrange distances (500-2500km, e.g. Amsterdam to Paris is ~500km, Amsterdam to Lissabon is ~2250km). There is growing awareness nowadays about the fact that flying is very harmful to the environment (e.g. flight shame), and that taking the train is a much better alternative in terms of energy consumption. The current problem in Europe is that train traveling has 2 large downsides compared to the highly emissive flight transports. 
-    1) It takes a lot longer, often including different connections that have to be completed. 
+How engaged are consumers to consider their footprint when traveling midrange distances (500-2500km, e.g. Amsterdam to Paris is ~500km, Amsterdam to Lissabon is ~2250km). There is growing awareness nowadays about the fact that flying is harmful to the environment (e.g. flight shame, carbon compensation), and that taking the train is a much better alternative in terms of energy consumption. The current problem in Europe is that train traveling has 2 large downsides compared to the high emission flight transports:
+    1) It takes a longer, often including different stopover/connections that have to be completed. 
     2) It is more expensive. 
-The first drawback is obvious and will always be existent compared to flying, but it can be reduced. However, the monetary drawback is one that feels counter-intuitive, and one would say it should be possible to facilitate cheaper land transport compared to air transport. But would consumers go for the land alternative given the prices are (more) equal, and would they be making these decisions over environmental reasons or other possible ones (e.g. more comfort?). Also, given a situation where a carbon tax would exist over transport, the carbon emissions would make flying more expensive than any train journey (https://www.dw.com/en/trains-vs-planes-whats-the-real-cost-of-travel/a-45209552).
+The first drawback is obvious and will always be existent compared to flying (where stopovers are much more intensive actually), but it can be reduced. However, the monetary drawback is one that feels counter-intuitive, as one would say it should be possible to facilitate cheaper land transport compared to air transport when approaching the problem from an energy perspective (then again, think about what an airplanes needs to fly through other than air, whereas a train needs a fully produced and maintained railroad). But would consumers go for the land alternative given the prices are (more) equal, and would they be making these decisions over environmental reasons or other possible ones (e.g. more comfort?)(https://www.researchgate.net/publication/227363785_Transports_and_Consumers'_Ecological_Behaviour). Also, given a situation where a carbon tax would exist over transport, the carbon emissions would make flying more expensive than any train journey (https://www.dw.com/en/trains-vs-planes-whats-the-real-cost-of-travel/a-45209552).
 
 ## Research questions 
 <!-- The research question that will be examined in the experiment (or alternatively the hypothesis that will be tested in the experiment) -->
 
-1. Do people generally choose train travel over air travel given price/distance equality?
-2. Is there a distance (=? Duration maybe?) limit independent of pricing for which people prefer plane over train travel?
+1. Do people generally for holidays choose train travel over air travel given price/distance equality?
+2. Is there a duration (i.e. distance related) limit independent of pricing for which people prefer plane over train travel for holiday purposes?
 
 
 ## The related conceptual model 
@@ -57,30 +57,35 @@ This model should include:
   * Culture (europe has train travel culture, vs US or other regions)
 *Extraneous variable
   * Travel luxury (extraneous variable, influences cost and comfort but is not a study variable) 
+  * Reason for travel (here we only consider tourism)
+  * Duration of stay (here we do not consider this to simplify the model)
 
 Taking the most relevant variables in consideration: we conceptualize the follow graph model:
-![The conceptual model](C:/Users/Mirij/Downloads/experiment.png)
+![The conceptual model](C:\AAASweepsta\MSc. Computer Science\Seminar Data Science\Coursework\Coursework A\SeminarDataScience\assignmentA\experiment.png)
 
 
 ## Experimental Design 
 <!-- Note that the study should have a true experimental design-->
+To limit the variability, we study travel with a touristic goal, as this type of travel choice is mostly based on consumer intentions and less factors lying outside of the consumer (e.g. payment by company). 
+
 
 Subjects are divided in 6 groups.
-Reference price y1 is taken as the industry price for flying to a certain distance increased by some margin that corrects for the heavy tax priviliges that are currently enjoyed by flight operators (assuming these will disappear at some point in the future). A train price increase factor of 1.5 is used based on the article  stating UK train travel is around 50% more expensive than air travel (https://www.theguardian.com/environment/2021/jul/14/trains-far-greener-but-much-more-costly-than-planes-analysis-finds). A price decrease factor is determined at 0.75 by the idea that is hard to make railway transport inherently much cheaper (note air transport is mostly cheap for its tax privileges, e.g. no tax on fuel), and it is mostly to see whether an price advantage is extra decisive for subjects. 
+Reference price y1 is taken as the industry price for flying to a certain distance increased by some margin that corrects for the heavy tax privileges that are currently enjoyed by flight operators (assuming these legislative advantages will disappear at some point in the future). A train price increase factor of 1.5 is used based on the article  stating UK train travel is around 50% more expensive than air travel (https://www.theguardian.com/environment/2021/jul/14/trains-far-greener-but-much-more-costly-than-planes-analysis-finds). Even though this intra border travel price situation does not apply for a lot of European countries, a quick empirical study into inter-border travel shows way worse effects which are likely to relate to using multiple different operators without mutual price arrangements (e.g. Amsterdam paris €380 by train vs €126 by low-cost carrier) A price decrease factor is determined at 0.75 by the idea that is hard to make railway transport inherently much cheaper (note air transport is mostly cheap for its tax privileges, e.g. no tax on fuel), and it is mostly to see whether an price advantage is extra decisive for subjects. For train travel duration a formula is set up as a function of air travel duration, noting that airport time significantly increases air travel time, estimating a 3 hours extra waiting and commute time (non-flying) compared to train travel  (https://www.researchgate.net/publication/333821257_A_Level_Playing_Field_for_Comparing_Air_and_Rail_Travel_Times). The travel speed of high-speed trains and air travel are estimated at 300–350 km/h and 740-930 km/h respectively, setting the ratio of average train speed to be 2.75 times slower than average air speed (also considering indirect routes of trains and stops).
 
-- Subject from group 1 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
-- Subject from group 2 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 1.5*y1, or don't travel.
-- Subject from group 3 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 0.75*y1, or don't travel.
-- Subject from group 4, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price y1, or don't travel.
-- Subject from group 5, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 1.5*y1, or don't travel.
-- Subject from group 6, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in z+z+z hours for price 0.75*y1, or don't travel.
+- Subject from group 1 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours for price y1, or don't travel.
+- Subject from group 2 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours for price 1.5\*y1, or don't travel.
+- Subject from group 3 are presented the choice: Fly to destination x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours for price 0.75\*y1, or don't travel.
+- Subject from group 4, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours for price y1, or don't travel.
+- Subject from group 5, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours for price 1.5\*y1, or don't travel.
+- Subject from group 6, after watching a video about the environmental problems and dangers, are presented the choice : Fly to destination x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours for price 0.75\*y1, or don't travel.
 
 
 ## Experimental procedure 
 <!-- Describe how the experiment will be executed step by step -->
-The experiment can be executed decentralized in a real setting (ensuring validity) by setting up a collaboration with a ticket provider, which provides a portal where both train and plane tickets can be bought (probably for a limited amount of trajectories that are properly reachable by both air and train travel (e.g. the destination should not require some extensive other form of travel). 
+The experiment could be executed decentralized in a real setting (ensuring validity) by setting up a collaboration with a ticket provider, which provides a portal where both train and plane tickets can be bought (e.g. probably for a limited amount of trajectories that are properly reachable by both air and train travel (e.g. the destination should not require some extensive other form of travel). 
+However, chances are this is too difficult to set up, and there is still a reasonable possibility people will make different decisions based on the status quo (i.e. try to take advantage of this opportunity). So the research could also be executed in a hypothetical setting through a questionnaire provided on the platform, perhaps with a discount on their next train/flight booking to ensure participants. 
 
-Once on the platform, subjects will have to fill in a small questionnaire to document some characteristics (e.g. environmental focus and financial means). The questionnaire will start with a paragraph explaining data is anonymously gathered through this portal for experimental reasons, and the prices available might be influenced unexpectedly and might not reflect realistic prices. After filling in the questionnaire, the subject either a video is shown addressing the urgency of environmental awareness, or no video is shown. The underlying algorithm can decide this, preventing a selection bias. The subject is then allowed to search for journeys, for which it is presented always the train and air options together in the same window, with prices based on the experimental design, again selected by the algorithm to ensure the validity of the data collection. The location of the different options content within the window can be varied to reduce the risk of decreasing the reliability. 
+Once on the platform, subjects will have to fill in a small questionnaire to document some characteristics (e.g. environmental focus and financial means, basic travel preferences). The questionnaire will start with a paragraph explaining data is anonymously gathered through this portal for experimental reasons, and the prices available might be influenced unexpectedly and might not reflect realistic prices. After filling in the questionnaire, the subjects are placed in a subject group by an underlying algorithm and subsequently the subject is shown either a video addressing the urgency of environmental awareness, or no video is shown. An underlying algorithm will decide this to prevent a selection bias and ensure equal statistic measures. The subject is then allowed to search for journeys, for which it is presented always the train and air options together in the same window, with prices based on the experimental design, again selected by the algorithm to ensure the validity of the data collection. The location of the different options content within the window can be varied to reduce the risk of decreasing the reliability. In the real setting the subject is provided with the tickets, whereas in the hypothetical setting the customer is thanked for his cooperation.
 
 
 
@@ -93,14 +98,12 @@ Smaller measures could be decision time, window activity (e.g. using screen moni
 
 ## Participants
 <!-- Describe which participants will recruit in the study and how they will be recruited -->
-Through social media it is marketed to all kinds of individuals, and through the study it is monitored what target groups require extra input so that marketing focus can be adjusted. The goal is to include any type of person that considers traveling to destinations by air. The participants get real tickets through the collaboration with the ticket provider, so possibly a hype from certain groups of people might start around the platform which could prevented by introducing an application combined with random subject selection for such groups. 
+for the real setting, the experiment is marketed through social media to all kinds of individuals, and through the study it is monitored what target groups require extra input so that marketing focus can be adjusted. The goal is to include any type of person that considers traveling to destinations by air. The participants get real tickets through the collaboration with the ticket provider, so possibly a hype from certain groups of people might start around the platform which could prevented by introducing an application combined with random subject selection for such groups.
+For the real setting, a dummy ticket provider platform could be used. The marketing can be done equally, except with the clear message it is not for real tickets and people are participating in a case study. 
 
 
 ## Suggested statistical analyses
-Describe the statistical test you suggest to care out on the collected data
-TODOOOOOO
-TODOOOOOO
-TODOOOOOO
+The data we receive is nominal (i.e choice of travel -> train, air, no travel), so we can do tests for difference of proportions (visualize histograms per distance range) and do chi-square test to see what factors are independent in the decision process. Also a regression analysis could be done to see relating price with duration to get an idea about the willingness of people to pay for a certain travel duration. 
 
 
 # Part 2 - Generalized linear models
@@ -141,6 +144,7 @@ library(RColorBrewer)
 library(wordcloud)
 # install.packages("reshape", dependencies=T)
 library(reshape)
+
 ################### functions
   
 clearTweets <- function(tweets, excl) {
@@ -163,15 +167,41 @@ clearTweets <- function(tweets, excl) {
   
   return(corpus_clean)
 } 
+
+```
+
+```{r}
+
+# api_key <- "tIJXrCxXQp3VcqjTqJwu9UH9t"
+# api_secret <- "JAcL5WNS4XLX3ozGgPrOjelbUmqrrkts0YOxXnYvEeccAag3ae"
+# access_token <- "1498571824107511810-DMGyPl1veqJn03LhIo4qIrOAvISNSE"
+# access_secret <- "sI2QceNAbsOQxBrJC1GZPPxZ69brSDMGW9Tw0O7Q9nP4t"
+
+# other account
+consumer_key <- 'PSOj9A2np514hq5Iy2Qupu7vV'
+consumer_secret <- '0LdQAVVsa45QOMbbrnvQx5Qhq8FJRCcwsfxQJex5INjBvwVcXX'
+access_token <- '1464626303047458826-Fdaj2PXpFeGRTOYhgX8oy5hSnuXiSG'
+access_secret <- '0iwXvcpDEsGtoMlvlks14YbGH2QwvJdnktaCnoeVtvSBP'
+
+setup_twitter_oauth(consumer_key,consumer_secret,access_token,access_secret)
+
+origop <- options("httr_oauth_cache")
+options(httr_oauth_cache = TRUE)
+```
+
+
+
+```{r}
 ## capture all the output to a file.
 ################# Collect from Twitter
 # for creating a twitter app (apps.twitter.com) see youtube https://youtu.be/lT4Kosc_ers
-#consumer_key <-'your key'
-#consumer_scret <- 'your secret'
-#access_token <- 'your access token'
-#access_scret <- 'your access scret'
-source("your_twitter.R") #this file will set my personal variables for my twitter app, adjust the name of this file. use the provide template your_twitter.R
-setup_twitter_oauth(consumer_key,consumer_scret, access_token,access_scret) #connect to  twitter app
+
+# source("your_twitter.R") #this file will set my personal variables for my twitter app, adjust the name of this file. use the provide template your_twitter.R
+# setup_twitter_oauth(consumer_key,consumer_scret, access_token, access_scret) #connect to  twitter app
+```
+
+
+```{r}
 ##### This example uses the following 3 celebrities: Donald Trump, Hillary Clinton, and Bernie Sanders
 ##  You should replace this with your own celebrities, at least 3, but more preferred 
 ##  Note that it will take the computer some to collect the tweets
@@ -181,16 +211,7 @@ setup_twitter_oauth(consumer_key,consumer_scret, access_token,access_scret) #con
 tweets_T <- searchTwitter("#EnergyTransition", n=200, lang="en", resultType="recent") #n recent tweets about Energy Transition, in English ( Twitter sometimes modifies number of tweets that you can collect)
 tweets_C <- searchTwitter("#SustainableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Sustainable Energy
 tweets_B <- searchTwitter("#RenewableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Renewable Energy
-######################## WordCloud
-### This not requires in the assignment, but still fun to do 
-# based on https://youtu.be/JoArGkOpeU0
-#corpus_T<-clearTweets(tweets_T, c("trump","amp","realdonaldtrump","trumptrain","donald","trumps","alwaystrump")) #remove also some campain slogans
-#wordcloud(corpus_T, max.words=50)
-#corpus_C<-clearTweets(tweets_C, c("hillary","amp","clinton","hillarys"))
-#wordcloud(corpus_C,  max.words=50)
-#corpus_B<-clearTweets(tweets_B, c("bernie", "amp", "sanders","bernies"))
-#wordcloud(corpus_B,  max.words=50)
-##############################
+
 ######################## Sentiment analysis
 tweets_T.text <- laply(tweets_T, function(t)t$getText()) #get text out of tweets 
 tweets_C.text <- laply(tweets_C, function(t)t$getText()) #get text out of tweets
@@ -223,7 +244,7 @@ Analyze the homogeneity of variance of sentiments of the tweets of the different
 library(car)
 leveneTest(semFrame$score, semFrame$Candidate, center = median)
 ```
-The variance across the different organisations is tested using the  Levene's test. The P test results in a value of 0.05258, which above 0.05. Thus, it can be concluded that there is no reason to reject the null hypothesis and we can assume the organisations are similar.
+The variance across the different organisations is tested using the  Levene's test. The P test results in a value of 0.07619, which is above 0.05. Thus, it can be concluded that there is no reason to reject the null hypothesis and we can assume the organisations have similar variance.
  <!-- Is the variance across the different organisations equal? -->
 
 ### Visual inspection Mean and distribution sentiments
@@ -263,9 +284,9 @@ d<-mysummary(energyTransition$score, FALSE)
 boxplot(score ~ Candidate, data=semFrame, main="Sentiment distribution in tweets",
 xlab="Organisation", ylab="score")
 ```
-The mean for renewable Energy and sustainable Energy are close to each other. Whereas the mean for energy Transition is significantly lower. The standard deviations for all organisations are similar.
+The means for Renewable Energy and Energy Transition are close to each other, whereas the mean for Sustainable Energy is significantly lower. The standard deviations for all organisations are similar.
 
-From the boxplot we can see that for all three topics, most of the tweets have a median sentiment around of 0.
+From the boxplot we can see that for all three topics, the interquartile ranges of the sentiments all lie on the interval [0,1].
 
 ### Frequentist approach
 
@@ -292,9 +313,10 @@ pander(Anova(model1))
 The F-value in an ANOVA is calculated as: variation between sample means / variation within the samples.
 The higher the F-value in an ANOVA, the higher the variation between sample means relative to the variation within the samples. The higher the F-value, the lower the corresponding p-value.
 The p-value is 0.0637. This means the difference in sentiment between the organisations would happen 6.735% of the time. As the difference is larger than 0.05, the difference is not statistically significant and is likely due to chance. 
+TODO: this is not correct, write about significant p value, but indeed very low r^2 so very little meaning to the model
 
 #### Post Hoc analysis
-If a model that includes the individual/organisation is better in explaining the sentiments of tweets than a model without such predictor, conduct a post-hoc analysis with e.g. Bonferroni correction, to examine which of individual/organisation tweets differ from the other individual/organisation tweets. Provide interpretation of the results
+If a model that includes the individual/organisation is better in explaining the sentiments of tweets than a model without such predictor, conduct a post-hoc analysis with e.g. Bonferroni correction, to examine which of individual/organisation tweets differ from the other individual/organisation tweets. Provide interpretation of the results.
 
 ```{r}
 #include your code and output in the document
@@ -302,6 +324,7 @@ pairwise.t.test(semFrame$score, semFrame$Candidate, paired = FALSE, p.adjust.met
 # plot(model1)
 pander(tapply(semFrame$score, semFrame$Candidate, shapiro.test)) # test normaliy of each level
 leveneTest(semFrame$score, semFrame$Candidate)
+
 ```
 The p-values corrected with Bonferroni show that the p-values are still above 0.05 between all groups. Therefore, no organisation is better in explaining the sentiment of tweets.
 
@@ -316,6 +339,8 @@ A Linear Model analysis was conducted to test the difference between cohorts on 
 #### Model description
 
 Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown). Assume a Gaussian distribution for the tweet’s sentiments rating. Justify the priors.
+
+
 
 Null model:
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
@@ -341,11 +366,20 @@ m1 <-map2stan(
   ), data = semFrame ,iter = 100, chains = 4, cores = 4
 )
 ```
-The chosen priors are 0, as it is a neutral value for sentiment.
+Mathematical model:
+
+$score \sim Norm(\mu , \sigma)$ [likelihood]
+$\mu = a$ [linear model]
+$a \sim Norm(0.5,1)$ [prior]
+$\sigma \sim uniform(0,1)$ [prior]
+
+
+The chosen priors are \mu ~ Norm(0.5, 1.0) as we on average sentiment levels range from -1 to 2, taking 0.5 as it is a neutral value for sentiment.
+\sigma is picked as a uniform prior between 0 and 1. 
 
 #### Model comparison
 
-Conduct model analysis and provide brief interpretation of the results
+Conduct model analysis and provide brief interpretation of the results.
 
 ```{r}
 #include your code and output in the document
@@ -688,6 +722,7 @@ Write a small section for a scientific publication, in which you report the resu
 ### Model description
 
 Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown).  Assume a Gaussian distribution for the scores. Justify the priors.
+
 
 ### Model comparison
 
