@@ -3,11 +3,11 @@ title: "Report coursework assignment A - 2021-2022"
 author: "Sara Hacipoglu (5569206),  Lucas Veeger (4459628)"
 date: "13/06/2022"
 output:
+  html_document:
+    df_print: paged
   pdf_document:
     fig_caption: yes
     number_sections: yes
-  html_document:
-    df_print: paged
 subtitle: CS4125 Seminar Research Methodology for Data Science
 editor_options:
   chunk_output_type: inline
@@ -257,6 +257,9 @@ analysis](C:%5CAAASweepsta%5CMSc.%20Computer%20Science%5CSeminar%20Data%20Scienc
 Include the annotated R script (excluding your personal Keys and Access
 Tokens information), but put echo=FALSE, so code is not included in the
 output pdf file.
+```{r echo=FALSE}
+load('C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A/SeminarDataScience/assignmentA/finalEnv.RData')
+```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
 #during writing you could add "eval = FALSE",  kntr will than not run this code chunk (take some time do)
@@ -310,14 +313,9 @@ clearTweets <- function(tweets, excl) {
 
 ```
 
-```{r}
+```{r echo=FALSE}
 
-# api_key <- "tIJXrCxXQp3VcqjTqJwu9UH9t"
-# api_secret <- "JAcL5WNS4XLX3ozGgPrOjelbUmqrrkts0YOxXnYvEeccAag3ae"
-# access_token <- "1498571824107511810-DMGyPl1veqJn03LhIo4qIrOAvISNSE"
-# access_secret <- "sI2QceNAbsOQxBrJC1GZPPxZ69brSDMGW9Tw0O7Q9nP4t"
-
-# other account
+# account
 consumer_key <- 'PSOj9A2np514hq5Iy2Qupu7vV'
 consumer_secret <- '0LdQAVVsa45QOMbbrnvQx5Qhq8FJRCcwsfxQJex5INjBvwVcXX'
 access_token <- '1464626303047458826-Fdaj2PXpFeGRTOYhgX8oy5hSnuXiSG'
@@ -329,7 +327,7 @@ origop <- options("httr_oauth_cache")
 options(httr_oauth_cache = TRUE)
 ```
 
-```{r}
+```{r echo=FALSE, eval=FALSE}
 tweets_T <- searchTwitter("#EnergyTransition", n=200, lang="en", resultType="recent") #n recent tweets about Energy Transition, in English ( Twitter sometimes modifies number of tweets that you can collect)
 tweets_C <- searchTwitter("#SustainableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Sustainable Energy
 tweets_B <- searchTwitter("#RenewableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Renewable Energy
@@ -358,7 +356,7 @@ semFrame$Candidate <-factor(semFrame$Candidate, labels=c("Energy Transition", "S
 Analyze the homogeneity of variance of sentiments of the tweets of the
 different individuals/organisations, and provide interpretation
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 library(car)
 leveneTest(semFrame$score, semFrame$Candidate, center = median)
@@ -376,7 +374,7 @@ variance.
 Graphically examine the mean and distribution sentiments of tweets for
 each individual/organisation, and provide interpretation
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 energyTransition<-semFrame[semFrame$Candidate=="Energy Transition",]
 #print(energyTransition)
@@ -427,7 +425,7 @@ individual/organisation a tweet relates has a significant impact on
 explaining the sentiments of the tweets. Assume a Gaussian distribution
 for the tweet's sentiments rating. Provide interpretation of results
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 model0<- lm(score ~ 1, data = semFrame, na.action = na.exclude) #model without predictor
 model1 <- lm(score ~ Candidate, data = semFrame, na.action = na.exclude) #model with predictor
@@ -466,7 +464,7 @@ conduct a post-hoc analysis with e.g. Bonferroni correction, to examine
 which of individual/organisation tweets differ from the other
 individual/organisation tweets. Provide interpretation of the results.
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 pairwise.t.test(semFrame$score, semFrame$Candidate, paired = FALSE, p.adjust.method = "bonferroni")
 # plot(model1)
@@ -542,7 +540,7 @@ sentiment. $\sigma$ is picked as a uniform prior between 0 and 1.
 
 Conduct model analysis and provide brief interpretation of the results.
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 library(Bolstad)
 fit <-bayes.t.test(sustainableEnergy$score, renewableEnergy$score, paired=TRUE)
@@ -560,7 +558,7 @@ say that model 1 has improved from model 0.
 Compare sentiments of individual/organisation pairs and provide a brief
 interpretation (e.g. CIs)
 
-```{R}
+```{R echo=FALSE}
 p1 <- precis(m111, depth=2, prob = .95)
 # plot(p1)
 ```
@@ -816,7 +814,7 @@ interactive effect parameter
 
 #### Model comparison
 
-```{r message=FALSE, warning=FALSE, cache=TRUE, include=FALSE, results='hide'}
+```{r echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE, include=FALSE, results='hide'}
 wvbayes <- subset(webvisit, select = c(pages,version, portal ))
 wvbayes$portalN <- as.numeric(wvbayes$portal)
 wvbayes$versionN <- as.numeric(wvbayes$version)
@@ -865,14 +863,14 @@ m44 <-map2stan(
 )
 ```
 
-```{r}
+```{r echo=FALSE}
 compare(m00,m11,m22,m33,m44)
 ```
 
 The compare function shows that m4 has the smallest WAIC value, thus the
 best out-of-sample fit.
 
-```{r}
+```{r echo=FALSE}
 precis(m44,prob= .95)
 ```
 
@@ -890,7 +888,7 @@ c=0, d=0.
 Use graphics to inspect the distribution of the score, and relationship
 between session and score
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 
 # setwd("C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A") 
@@ -924,7 +922,7 @@ thereby assuming a Gaussian distribution for the scores, determine:
     3.84441), meaning their is variation between participants in their
     score.
 
-```{r}
+```{r echo=FALSE}
 #include your code and output in the document
 library(nlme)
 # m <- lme(score ~ session,random = ~subject|id_c,data=set, method="ML")
@@ -953,25 +951,25 @@ intervals(m2_ses_subj, 0.95)
 
 ```
 
-```{r}
+```{r echo=FALSE}
 ARModel <- update(m2_ses_subj, correlation = corAR1(0, form = ~session|subject))
 summary(ARModel)
 
 
 ```
 
-```{r}
+```{r echo=FALSE}
 anova(intercept, m0_randomIntercept, m1_session, m2_ses_subj, ARModel)
 ```
 
-```{r}
+```{r echo=FALSE}
 sessionsQuadratic <- update(ARModel, .~. + I(session^2))
 sessionsCubic <- update(sessionsQuadratic, .~. + I(session^3))
 anova(intercept, m0_randomIntercept, m1_session, m2_ses_subj, ARModel, sessionsQuadratic, sessionsCubic)
 anova(ARModel, sessionsQuadratic, sessionsCubic)
 ```
 
-```{r}
+```{r echo=FALSE}
 
 library(pander)
 pander(anova(m0_randomIntercept, m1_session),
@@ -1042,7 +1040,7 @@ distribution in the interval [0,1].
 
 Compare models with with increasing complexity.
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 #include your code and output in the document
 library(rethinking)
 
@@ -1063,7 +1061,7 @@ m0 <- ulam(
 
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # random intercept
 m1 <- ulam(
   alist(
@@ -1088,7 +1086,7 @@ m1 <- ulam(
 
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # Fixed effect session
 m2 <- ulam(
   alist(
@@ -1115,7 +1113,7 @@ m2 <- ulam(
 
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # Random slope
 m3 <- ulam(
   alist(
@@ -1144,7 +1142,7 @@ m3 <- ulam(
 
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # Correlation
 m4 <- ulam(
   alist(
@@ -1173,7 +1171,7 @@ m4 <- ulam(
 )
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # Quadratic
 set$session2 <- set$session*set$session
 
@@ -1205,7 +1203,7 @@ m5 <- ulam(
 )
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # Cubic
 set$session3 <- set$session2*set$session
 
@@ -1237,12 +1235,9 @@ m6 <- ulam(
 )
 ```
 
-```{r}
-load('C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A/SeminarDataScience/assignmentA/finalEnv.RData')
-```
 
 
-```{r}
+```{r echo=FALSE}
 library(ggplot2)
 
 
@@ -1263,7 +1258,7 @@ similarly scoring models.
 Examine the estimate of parameters of the model with best fit, and
 provide a brief interpretation.
 
-```{r}
+```{r echo=FALSE}
 plot(compare(m0,m1,m2,m3,m4,m5,m6, func=WAIC))
 plot(precis(m2, depth = 2, prob=.95))
 
