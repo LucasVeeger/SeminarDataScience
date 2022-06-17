@@ -113,7 +113,7 @@ The data we receive is nominal (i.e choice of travel -> train, air, no travel), 
 ### Conceptual model
 Make a conceptual model for the following research question: Is there a difference in the sentiment of the tweets related to the different individuals/organisations?
 
-![Conceptual model Twitter sentiment analysis](C:/Users/mirij/Downloads/experiment2.png)
+![Conceptual model Twitter sentiment analysis](C:\AAASweepsta\MSc. Computer Science\Seminar Data Science\Coursework\Coursework A\SeminarDataScience\assignmentA\question2.png)
 
 ### Collecting tweets, and data preparation
 Include the annotated R script (excluding your personal Keys and Access Tokens information), but put echo=FALSE, so code is not included in the output pdf file.
@@ -121,8 +121,9 @@ Include the annotated R script (excluding your personal Keys and Access Tokens i
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
 #during writing you could add "eval = FALSE",  kntr will than not run this code chunk (take some time do)
-# getwd()
-# setwd("C:/Users/mirij/Desktop") 
+
+setwd("C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A") 
+
 # apple , note use / instead of \, which used by windows
 # install.packages("twitteR", dependencies = TRUE)
 library(twitteR)
@@ -345,7 +346,7 @@ Describe the mathematical model fitted on the most extensive model. (hint, look 
 Null model:
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
 library(rethinking)
-m0 <-map2stan(
+m000 <-map2stan(
   alist(
   score ~ dnorm(mu, sigma),
   mu <- a,
@@ -357,7 +358,7 @@ m0 <-map2stan(
 
 Model model that includes organisation as a factor:
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
-m1 <-map2stan(
+m111 <-map2stan(
   alist(
   score ~ dnorm(mu, sigma),
   mu <- a[Candidate],
@@ -383,9 +384,12 @@ Conduct model analysis and provide brief interpretation of the results.
 
 ```{r}
 #include your code and output in the document
- 
-compare(m0, m1, func=WAIC)
-precis(m1, depth=2, prob = .95)
+library(Bolstad)
+fit <-bayes.t.test(sustainableEnergy$score, renewableEnergy$score, paired=TRUE)
+show(fit)
+# plot(fit)
+compare(m000, m111, func=WAIC)
+precis(m111, depth=2, prob = .95)
 ```
 
 The WAIC for model 1 is smaller than the WAIC of model 0, thus we can say that model 1 has improved from model 0. 
@@ -395,7 +399,8 @@ The WAIC for model 1 is smaller than the WAIC of model 0, thus we can say that m
 Compare sentiments of individual/organisation pairs and provide a brief interpretation (e.g. CIs)
 
 ```{R}
-precis(m1, depth=2, prob = .95)
+p1 <- precis(m111, depth=2, prob = .95)
+# plot(p1)
 ```
 EnergyTransition has the most distinct mean compared to sustainableEnergy and renewableEnergy.
 
@@ -405,7 +410,7 @@ EnergyTransition has the most distinct mean compared to sustainableEnergy and re
 ### Conceptual model
 Make a conceptual model underlying this research question
 
-![Conceptual model Twitter sentiment analysis](C:/Users/mirij/Downloads/experiment3.png)
+![Conceptual model Twitter sentiment analysis](C:\AAASweepsta\MSc. Computer Science\Seminar Data Science\Coursework\Coursework A\SeminarDataScience\assignmentA\question3.png)
 
 ### Visual inspection
 Graphically examine the variation in page mean number of visits for the four different conditions
@@ -414,13 +419,13 @@ Graphically examine the variation in page mean number of visits for the four dif
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(devtools)
 library(ggplot2)
-library(rcompanion)
+# library(rcompanion)
 library(dplyr)
 library(gmodels)
 library(pander)
 library(car)
-#setwd("C:/Users/mirij/Desktop")
-setwd("C:/Users/ilgin/OneDrive/Documents/GitHub/SeminarDataScience/assignmentA")
+
+# setwd("C:/Users/ilgin/OneDrive/Documents/GitHub/SeminarDataScience/assignmentA")
 webvisit<- read.csv("webvisit2.csv")
 #levenes test
 pander(leveneTest(webvisit$pages, interaction(webvisit$version , webvisit$portal)),
@@ -570,14 +575,14 @@ wvbayes <- subset(webvisit, select = c(pages,version, portal ))
 wvbayes$portalN <- as.numeric(wvbayes$portal)
 wvbayes$versionN <- as.numeric(wvbayes$version)
 library(rethinking)
-m0 <-map2stan(
+m00 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a,
     a ~ dnorm(25,25)
   ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
 )
-m1 <-map2stan(
+m11 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + b*versionN,
@@ -585,7 +590,7 @@ m1 <-map2stan(
     b ~ dunif(0, 1)
   ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
 )
-m2 <-map2stan(
+m22 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + c*portalN,
@@ -593,7 +598,7 @@ m2 <-map2stan(
     c ~ dunif(0, 1)
   ), data = wvbayes,iter = 2000, chains = 4, cores = 4
 )
-m3 <-map2stan(
+m33 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + b*versionN + c*portalN,
@@ -602,7 +607,7 @@ m3 <-map2stan(
     c ~ dunif(0, 1)
   ), data = wvbayes,iter = 2000, chains = 4, cores = 4
 )
-m4 <-map2stan(
+m44 <-map2stan(
   alist(
     pages ~ dpois(lambda),
     log(lambda) <- a + b*versionN + c*portalN + d*versionN*portalN,
@@ -615,12 +620,12 @@ m4 <-map2stan(
 ```
 
 ```{r}
-compare(m0,m1,m2,m3,m4)
+compare(m00,m11,m22,m33,m44)
 ```
 The compare function shows that m4 has the smallest WAIC value, thus the best out-of-sample fit. 
 
 ```{r}
-precis(m4,prob= .95)
+precis(m44,prob= .95)
 ```
 Looking at 95% credible intervals of the parameters of model 4, the credible values of coefficient b for version predictor, coefficient c portal predictor and coefficient d interaction predictor are not including null. 
 As these interval do not contain the value zero, this leads to the rejection of the null hypothesis that coefficients b=0, c=0, d=0. 
@@ -632,7 +637,7 @@ Use graphics to inspect the distribution of the score, and relationship between 
 ```{r}
 #include your code and output in the document
 
-setwd("C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A") 
+# setwd("C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A") 
 
 set <- read.csv("set1.csv")
 
@@ -651,9 +656,12 @@ xlab="Session", ylab="Score over sessions")
 ### Multilevel analysis
 Conduct multilevel analysis and calculate 95% confidence intervals thereby assuming a Gaussian distribution for the scores, determine:
 
-* If session has an impact on people score
-* If there is significant variance between the participants in their score
+* If session has an impact on people score 
+A: The box plot already clearly shows the increasing sessions have a positive correlation with the score. The fit of the data on a model with a fixed effect of the the session (m1_session) has the best AIC score and shows (like the m2_ses_subj model fit as well) that the correlation between session and score is significant (p ≈ 0). 
 
+* If there is significant variance between the participants in their score 
+A: When looking at the confidence intervals of the last model (m2_ses_subj) we see clearly that the intercept of the standard deviation of the subject as random effect is not zero (SD = 3.84441), meaning their is variation between participants in their score.
+ 
 
 ```{r}
 #include your code and output in the document
@@ -667,16 +675,23 @@ intercept <- gls(score ~ 1, data=set, method="ML", na.action = na.exclude)
 # random intercept
 m0_randomIntercept <- lme(score ~ 1,random = ~1 | subject,method = "ML",data=set, na.action = na.exclude, control = list(opt="optim"))
 
+#
+# m3_subj <- lme(score ~ subject,random = ~1 | subject,method = "ML",data=set, na.action = na.exclude, control = list(opt="optim"))
 # fixed effect 
-# session_m1 <- lme(score ~ session,random = ~1 | subject,method = "ML",data=set)
 m1_session <-  update(m0_randomIntercept, .~. + session)
 # random effect
 m2_ses_subj <- update(m1_session, random = ~session|subject)
+# 
+
 
 summary(m0_randomIntercept)
 summary(m1_session)
 summary(m2_ses_subj)
+intervals(m1_session, 0.95)
+intervals(m2_ses_subj, 0.95)
+
 ```
+
 ```{r}
 ARModel <- update(m2_ses_subj, correlation = corAR1(0, form = ~session|subject))
 summary(ARModel)
@@ -697,25 +712,26 @@ anova(ARModel, sessionsQuadratic, sessionsCubic)
 ```{r}
 
 library(pander)
-pander(anova(m0, m1),
+pander(anova(m0_randomIntercept, m1_session),
 caption = "Compare if knowledge provide better fit than no knowledge")
 
-pander(anova(m0),
+pander(anova(m0_randomIntercept),
 caption = "Effect of organisation type on post test score")
 
-pander(summary(m1))
+pander(summary(m1_session))
 
 library(car)
-pander(Anova(m1))
+pander(Anova(m1_session))
 
-intervals(m0, level = 0.95)
-intervals(m1,level = 0.95)
+intervals(m0_randomIntercept, level = 0.95)
+intervals(m1_session,level = 0.95)
 
 
 ```
 
 ### Report section for a scientific publication
-Write a small section for a scientific publication, in which you report the results of the analyses, and explain the conclusions that can be drawn.
+"Out of multiple models fitted on the data, the m1_session model (fixed effects: score ~ session, random effect: subject) best modelled the effect of the session and score, influenced by subject variability. It showed the best information score (AIC = 939.2). The relationship between session and score showed a significant positive correlation (intercept = 13.17, session = 0.9916, p-value < 0.0001). In addition, there is a variability among subjects, SD = 3.84441 (95% CI 2.874468 5.141645). "
+TODOO: expand with BAyesian stuff
 
 ## Bayesian approach
 
@@ -723,12 +739,27 @@ Write a small section for a scientific publication, in which you report the resu
 
 Describe the mathematical model fitted on the most extensive model. (hint, look at the mark down file of the lectures to see example on formulate mathematical models in markdown).  Assume a Gaussian distribution for the scores. Justify the priors.
 
+Mathematical model:
+
+$score \sim Norm(\mu , \sigma)$ [likelihood]
+$\mu = a + a\_subject + b*session$ [linear model]
+$a\_subject \sim Norm(0,\sigma_{subject})$  [adaptive prior]
+$\sigma_{subject} = dcauchy(0,1)$ [hyper prior]
+$a \sim Norm(15,2.5)$ [fixed prior]
+$b \sim Norm(1, 1)$ [fixed prior]
+$\sigma \sim dcauchy(0,1)$ [fixed prior]
+
+The priors for a is taken (15,1), as the average and the variation at the first sessions indicate so.
+\sigma_{subject} is taken a a cauchy distribution with a zero intercept and standard \gamma value of 2 as distributions of the scores per session is somewhat broad.
+The b value is set with the idea of a steady increase of score per session with a value of about 1. 
+The fixed prior \sigma is set to a cauchy distribution in the interval [0,1]. 
+
 
 ### Model comparison
 
 Compare models with with increasing complexity. 
 
-```{r}
+```{r eval=FALSE}
 #include your code and output in the document
 library(rethinking)
 
@@ -742,14 +773,14 @@ m0 <- ulam(
     mu <- a,
     
     # fixed priors
-    a~dnorm(5.5, 2),
+    a~dnorm(15, 2.5),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, log_lik = TRUE
 )
 
 ```
 
-```{r}
+```{r eval=FALSE}
 # random intercept
 m1 <- ulam(
   alist(
@@ -766,7 +797,7 @@ m1 <- ulam(
     sigma_subject ~ dcauchy(0, 1),
     
     # fixed priors
-    a ~ dnorm(5.5, 2),
+    a~dnorm(15, 2.5),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, 
     log_lik = TRUE, control=list(adapt_delta=0.99)
@@ -774,8 +805,8 @@ m1 <- ulam(
 
 ```
 
-```{r}
-# Fixed effect time
+```{r eval=FALSE}
+# Fixed effect session
 m2 <- ulam(
   alist(
     #Likelihood
@@ -791,8 +822,8 @@ m2 <- ulam(
     sigma_subject ~ dcauchy(0, 1),
     
     # fixed priors
-    a ~ dnorm(5.5, 2),
-    b ~ dnorm(0, 1),
+    a ~ dnorm(15, 2.5),
+    b ~ dnorm(1, 1),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, 
     log_lik = TRUE, control=list(adapt_delta=0.99)
@@ -801,7 +832,7 @@ m2 <- ulam(
 
 ```
 
-```{r}
+```{r eval=FALSE}
 # Random slope
 m3 <- ulam(
   alist(
@@ -820,8 +851,8 @@ m3 <- ulam(
     c(a_sigma_subject, b_sigma_subject) ~ dcauchy(0, 1),
     
     # fixed priors
-    a ~ dnorm(5.5, 2),
-    b ~ dnorm(0, 1),
+    a ~ dnorm(15, 2.5),
+    b ~ dnorm(1, 1),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, 
     log_lik = TRUE, control=list(adapt_delta=0.99), 
@@ -830,7 +861,7 @@ m3 <- ulam(
 
 ```
 
-```{r}
+```{r eval=FALSE}
 # Correlation
 m4 <- ulam(
   alist(
@@ -850,8 +881,8 @@ m4 <- ulam(
     Rho ~ dlkjcorr(2),
     
     # fixed priors
-    a ~ dnorm(5.5, 2),
-    b ~ dnorm(0, 1),
+    a ~ dnorm(15, 2.5),
+    b ~ dnorm(1, 1),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, 
     log_lik = TRUE, control=list(adapt_delta=0.99), 
@@ -860,7 +891,7 @@ m4 <- ulam(
 ```
 
 
-```{r}
+```{r eval=FALSE}
 # Quadratic
 set$session2 <- set$session*set$session
 
@@ -883,8 +914,8 @@ m5 <- ulam(
     Rho ~ dlkjcorr(2),
     
     # fixed priors
-    a ~ dnorm(5.5, 2),
-    c(b,c) ~ dnorm(0, 1),
+    a ~ dnorm(15, 2.5),
+    c(b,c) ~ dnorm(1, 1),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, 
     log_lik = TRUE, control=list(adapt_delta=0.99), 
@@ -892,7 +923,7 @@ m5 <- ulam(
 )
 ```
 
-```{r}
+```{r eval=FALSE}
 # Cubic
 set$session3 <- set$session2*set$session
 
@@ -915,8 +946,8 @@ m6 <- ulam(
     Rho ~ dlkjcorr(2),
     
     # fixed priors
-    a ~ dnorm(5.5, 2),
-    c(b,c,d) ~ dnorm(0, 1),
+    a~dnorm(15, 2.5),
+    c(b,c,d) ~ dnorm(1, 1),
     sigma ~ dcauchy(0,1)
   ), data = set, iter = 10000, chains = 4, cores = 4, 
     log_lik = TRUE, control=list(adapt_delta=0.99), 
@@ -925,14 +956,34 @@ m6 <- ulam(
 ```
 
 
+```{r}
+env <- Sys.getenv(x = NULL, unset = "", names = NA)
+```
+
+```{r}
+library(ggplot2)
+
+
+#include your code and output in the document
+# compare(m0,m1, func=WAIC)
+compare(m0,m1,m2,m3,m4,m5,m6, func=WAIC)
+precis(m2, depth = 2, prob=.95)
+```
+
+
+Looking at the WAIC scores, the fixed effect of session creates the largest information improvement. All the other extended models seem to describe about equally well, but seem to overcomplicate the true model given the fact that the fixed effect model scores equally among these similarly scoring models. 
+
 ### Estimates examination
 
 Examine the estimate of parameters of the model with best fit, and provide a brief interpretation.
 
 
 ```{r}
-#include your code and output in the document
-compare(m0,m1,m2,m3,m4,m5,m6)
+plot(compare(m0,m1,m2,m3,m4,m5,m6, func=WAIC))
+plot(precis(m2, depth = 2, prob=.95))
+
 ```
+
+The parameter a is similar to our mathematical model (mean = 11.86, sd = 0.90) but with a lower standard deviation, meaning it is less variable than expected. \sigma_{subject} is estimated around 4, which we thus wrongly set to variate around 0. The estimate of b is nearly constant (mean = 0.99 sd = 0.02), where we believed it to vary with a sd = 1. This indicates the effect of session on score is really strongly correlated without much variation. Also the standard \sigma of the score likelihood is very stable (mean = 1.02, sd = 0.05). The expected choice of this variable (along with \sigma_{subject}) to variate around 0 seems in retrospect not vey likely, as one will in general expect some standard deviation around the score and subjects. 
 
 

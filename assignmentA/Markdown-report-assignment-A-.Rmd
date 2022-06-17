@@ -1,0 +1,1277 @@
+---
+title: "Report coursework assignment A - 2021-2022"
+author: "Sara Hacipoglu (5569206),  Lucas Veeger (4459628)"
+date: "13/06/2022"
+output:
+  pdf_document:
+    fig_caption: yes
+    number_sections: yes
+  html_document:
+    df_print: paged
+subtitle: CS4125 Seminar Research Methodology for Data Science
+editor_options:
+  chunk_output_type: inline
+  markdown:
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\tableofcontents
+
+# Part 1 - Design and set-up of true experiment
+
+## The motivation for the planned research
+
+<!-- (Max 250 words) -->
+
+Energy transition does not only encompass creating new forms of energy,
+it also concerns how energy is used. And as humans are its grand
+consumers, they also hold the power to decide where and how it is used.
+But the choice is not simple. Take the European transport situation,
+where low-cost air carriers dominate the human transport market
+(<https://time.com/6108578/why-flying-is-more-expensive-than-taking-the-train/>)
+despite the greatly connected railway infrastructure. The UK is an
+example on its own
+(<https://www.theguardian.com/environment/2021/jul/14/trains-far-greener-but-much-more-costly-than-planes-analysis-finds>),
+where domestic train fares seem to be 50% more expensive compared to
+plane fares. The US has a similar situation, but in a much wider
+stretched area, and on certain short connections there train travel
+financially wins over air travel
+(<https://www.allianztravelinsurance.com/travel/flight/train-vs-plane.htm>).
+India, a country that has relied on a sophisticated railway system for
+decades, experiences an ongoing shift to air travel because of lowering
+flight prices, combined with time, security and hygiene benefits. And in
+a lot of other exotic destinations (e.g. large parts of Latin America
+and Asia) the choice of transport is not really such a dilemma, with
+less developed railway systems and far more reliance on air transport as
+somewhat 'quick' way of travel. But given the environmental needs for a
+sustainable transport system, it would be wise to know how far people
+would be willing to go over land and for what price.
+
+## The theory underlying the research
+
+<!-- (Max 250 words) Preferable based on theories reported in literature-->
+
+How engaged are consumers to consider their footprint when traveling
+midrange distances (500-2500km, e.g. Amsterdam to Paris is \~500km,
+Amsterdam to Lissabon is \~2250km). There is growing awareness nowadays
+about the fact that flying is harmful to the environment (e.g. flight
+shame, carbon compensation), and that taking the train is a much better
+alternative in terms of energy consumption. The current problem in
+Europe is that train traveling has 2 large downsides compared to the
+high emission flight transports: 1) It takes a longer, often including
+different stopover/connections that have to be completed. 2) It is more
+expensive. The first drawback is obvious and will always be existent
+compared to flying (where stopovers are much more intensive actually),
+but it can be reduced. However, the monetary drawback is one that feels
+counter-intuitive, as one would say it should be possible to facilitate
+cheaper land transport compared to air transport when approaching the
+problem from an energy perspective (then again, think about what an
+airplanes needs to fly through other than air, whereas a train needs a
+fully produced and maintained railroad). But would consumers go for the
+land alternative given the prices are (more) equal, and would they be
+making these decisions over environmental reasons or other possible ones
+(e.g. more
+comfort?)(<https://www.researchgate.net/publication/227363785_Transports_and_Consumers'_Ecological_Behaviour>).
+Also, given a situation where a carbon tax would exist over transport,
+the carbon emissions would make flying more expensive than any train
+journey
+(<https://www.dw.com/en/trains-vs-planes-whats-the-real-cost-of-travel/a-45209552>).
+
+## Research questions
+
+<!-- The research question that will be examined in the experiment (or alternatively the hypothesis that will be tested in the experiment) -->
+
+1.  Do people generally for holidays choose train travel over air travel
+    given price/distance equality?
+2.  Is there a duration (i.e. distance related) limit independent of
+    pricing for which people prefer plane over train travel for holiday
+    purposes?
+
+## The related conceptual model
+
+This model should include: *Independent variable(s)* Travel duration
+(duration rather than distance, they might not be proportionate on train
+case - no direct train route etc.) \* Travel cost *Dependent variable*
+Choice of travel *Mediating variable (at least 1)* Travel comfort
+(duration - comfort - preference) *Moderating variable (at least 1)*
+Fear for airplanes \* Financial status, age (for cost) \* Culture
+(europe has train travel culture, vs US or other regions) *Extraneous
+variable* Travel luxury (extraneous variable, influences cost and
+comfort but is not a study variable) \* Reason for travel (here we only
+consider tourism) \* Duration of stay (here we do not consider this to
+simplify the model)
+
+Taking the most relevant variables in consideration: we conceptualize
+the follow graph model: ![The conceptual
+model](C:%5CAAASweepsta%5CMSc.%20Computer%20Science%5CSeminar%20Data%20Science%5CCoursework%5CCoursework%20A%5CSeminarDataScience%5CassignmentA%5Cexperiment.png)
+
+## Experimental Design
+
+<!-- Note that the study should have a true experimental design-->
+
+To limit the variability, we study travel with a touristic goal, as this
+type of travel choice is mostly based on consumer intentions and less
+factors lying outside of the consumer (e.g. payment by company).
+
+Subjects are divided in 6 groups. Reference price y1 is taken as the
+industry price for flying to a certain distance increased by some margin
+that corrects for the heavy tax privileges that are currently enjoyed by
+flight operators (assuming these legislative advantages will disappear
+at some point in the future). A train price increase factor of 1.5 is
+used based on the article stating UK train travel is around 50% more
+expensive than air travel
+(<https://www.theguardian.com/environment/2021/jul/14/trains-far-greener-but-much-more-costly-than-planes-analysis-finds>).
+Even though this intra border travel price situation does not apply for
+a lot of European countries, a quick empirical study into inter-border
+travel shows way worse effects which are likely to relate to using
+multiple different operators without mutual price arrangements (e.g.
+Amsterdam paris €380 by train vs €126 by low-cost carrier) A price
+decrease factor is determined at 0.75 by the idea that is hard to make
+railway transport inherently much cheaper (note air transport is mostly
+cheap for its tax privileges, e.g. no tax on fuel), and it is mostly to
+see whether an price advantage is extra decisive for subjects. For train
+travel duration a formula is set up as a function of air travel
+duration, noting that airport time significantly increases air travel
+time, estimating a 3 hours extra waiting and commute time (non-flying)
+compared to train travel
+(<https://www.researchgate.net/publication/333821257_A_Level_Playing_Field_for_Comparing_Air_and_Rail_Travel_Times>).
+The travel speed of high-speed trains and air travel are estimated at
+300--350 km/h and 740-930 km/h respectively, setting the ratio of
+average train speed to be 2.75 times slower than average air speed (also
+considering indirect routes of trains and stops).
+
+-   Subject from group 1 are presented the choice: Fly to destination x
+    by plane in z hours for price y1 or by train in (z-3)\*2.75 hours
+    for price y1, or don't travel.
+-   Subject from group 2 are presented the choice: Fly to destination x
+    by plane in z hours for price y1 or by train in (z-3)\*2.75 hours
+    for price 1.5\*y1, or don't travel.
+-   Subject from group 3 are presented the choice: Fly to destination x
+    by plane in z hours for price y1 or by train in (z-3)\*2.75 hours
+    for price 0.75\*y1, or don't travel.
+-   Subject from group 4, after watching a video about the environmental
+    problems and dangers, are presented the choice : Fly to destination
+    x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours
+    for price y1, or don't travel.
+-   Subject from group 5, after watching a video about the environmental
+    problems and dangers, are presented the choice : Fly to destination
+    x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours
+    for price 1.5\*y1, or don't travel.
+-   Subject from group 6, after watching a video about the environmental
+    problems and dangers, are presented the choice : Fly to destination
+    x by plane in z hours for price y1 or by train in (z-3)\*2.75 hours
+    for price 0.75\*y1, or don't travel.
+
+## Experimental procedure
+
+<!-- Describe how the experiment will be executed step by step -->
+
+The experiment could be executed decentralized in a real setting
+(ensuring validity) by setting up a collaboration with a ticket
+provider, which provides a portal where both train and plane tickets can
+be bought (e.g. probably for a limited amount of trajectories that are
+properly reachable by both air and train travel (e.g. the destination
+should not require some extensive other form of travel). However,
+chances are this is too difficult to set up, and there is still a
+reasonable possibility people will make different decisions based on the
+status quo (i.e. try to take advantage of this opportunity). So the
+research could also be executed in a hypothetical setting through a
+questionnaire provided on the platform, perhaps with a discount on their
+next train/flight booking to ensure participants.
+
+Once on the platform, subjects will have to fill in a small
+questionnaire to document some characteristics (e.g. environmental focus
+and financial means, basic travel preferences). The questionnaire will
+start with a paragraph explaining data is anonymously gathered through
+this portal for experimental reasons, and the prices available might be
+influenced unexpectedly and might not reflect realistic prices. After
+filling in the questionnaire, the subjects are placed in a subject group
+by an underlying algorithm and subsequently the subject is shown either
+a video addressing the urgency of environmental awareness, or no video
+is shown. An underlying algorithm will decide this to prevent a
+selection bias and ensure equal statistic measures. The subject is then
+allowed to search for journeys, for which it is presented always the
+train and air options together in the same window, with prices based on
+the experimental design, again selected by the algorithm to ensure the
+validity of the data collection. The location of the different options
+content within the window can be varied to reduce the risk of decreasing
+the reliability. In the real setting the subject is provided with the
+tickets, whereas in the hypothetical setting the customer is thanked for
+his cooperation.
+
+## Measures
+
+<!-- Describe the measure that will be used -->
+
+The major measure is travel choice (w.r.t. price, duration and the
+optional environmental awareness content). Smaller measures could be
+decision time, window activity (e.g. using screen monitoring software
+like Hotjar), moment of decision.
+
+## Participants
+
+<!-- Describe which participants will recruit in the study and how they will be recruited -->
+
+for the real setting, the experiment is marketed through social media to
+all kinds of individuals, and through the study it is monitored what
+target groups require extra input so that marketing focus can be
+adjusted. The goal is to include any type of person that considers
+traveling to destinations by air. The participants get real tickets
+through the collaboration with the ticket provider, so possibly a hype
+from certain groups of people might start around the platform which
+could prevented by introducing an application combined with random
+subject selection for such groups. For the real setting, a dummy ticket
+provider platform could be used. The marketing can be done equally,
+except with the clear message it is not for real tickets and people are
+participating in a case study.
+
+## Suggested statistical analyses
+
+The data we receive is nominal (i.e choice of travel -\> train, air, no
+travel), so we can do tests for difference of proportions (visualize
+histograms per distance range) and do chi-square test to see what
+factors are independent in the decision process. Also a regression
+analysis could be done to see relating price with duration to get an
+idea about the willingness of people to pay for a certain travel
+duration.
+
+# Part 2 - Generalized linear models
+
+## Question 1 Twitter sentiment analysis (Between groups - single factor)
+
+### Conceptual model
+
+Make a conceptual model for the following research question: Is there a
+difference in the sentiment of the tweets related to the different
+individuals/organisations?
+
+![Conceptual model Twitter sentiment
+analysis](C:%5CAAASweepsta%5CMSc.%20Computer%20Science%5CSeminar%20Data%20Science%5CCoursework%5CCoursework%20A%5CSeminarDataScience%5CassignmentA%5Cquestion2.png)
+
+### Collecting tweets, and data preparation
+
+Include the annotated R script (excluding your personal Keys and Access
+Tokens information), but put echo=FALSE, so code is not included in the
+output pdf file.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
+#during writing you could add "eval = FALSE",  kntr will than not run this code chunk (take some time do)
+
+# setwd("C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A") 
+
+# apple , note use / instead of \, which used by windows
+# install.packages("twitteR", dependencies = TRUE)
+library(twitteR)
+# install.packages("RCurl", dependencies = T)
+library(RCurl)
+# install.packages("bitops", dependencies = T)
+library(bitops)
+# install.packages("plyr", dependencies = T)
+library(plyr)
+# install.packages('stringr', dependencies = T)
+library(stringr)
+# install.packages("NLP", dependencies = T)
+library(NLP)
+# install.packages("tm", dependencies = T)
+library(tm)
+# install.packages("wordcloud", dependencies=T)
+# install.packages("RColorBrewer", dependencies=TRUE)
+library(RColorBrewer)
+library(wordcloud)
+# install.packages("reshape", dependencies=T)
+library(reshape)
+
+################### functions
+  
+clearTweets <- function(tweets, excl) {
+  
+  tweets.text <- sapply(tweets, function(t)t$getText()) #get text out of tweets 
+  
+  tweets.text = gsub('[[:cntrl:]]', '', tweets.text)
+  tweets.text = gsub('\\d+', '', tweets.text)
+  tweets.text <- str_replace_all(tweets.text,"[^[:graph:]]", " ") #remove graphic
+  
+  
+  corpus <- Corpus(VectorSource(tweets.text))
+  
+  corpus_clean <- tm_map(corpus, removePunctuation)
+  corpus_clean <- tm_map(corpus_clean, content_transformer(tolower))
+  corpus_clean <- tm_map(corpus_clean, removeWords, stopwords("english"))
+  corpus_clean <- tm_map(corpus_clean, removeNumbers)
+  corpus_clean <- tm_map(corpus_clean, stripWhitespace)
+  corpus_clean <- tm_map(corpus_clean, removeWords, c(excl,"http","https","httpst"))
+  
+  return(corpus_clean)
+} 
+
+```
+
+```{r}
+
+# api_key <- "tIJXrCxXQp3VcqjTqJwu9UH9t"
+# api_secret <- "JAcL5WNS4XLX3ozGgPrOjelbUmqrrkts0YOxXnYvEeccAag3ae"
+# access_token <- "1498571824107511810-DMGyPl1veqJn03LhIo4qIrOAvISNSE"
+# access_secret <- "sI2QceNAbsOQxBrJC1GZPPxZ69brSDMGW9Tw0O7Q9nP4t"
+
+# other account
+consumer_key <- 'PSOj9A2np514hq5Iy2Qupu7vV'
+consumer_secret <- '0LdQAVVsa45QOMbbrnvQx5Qhq8FJRCcwsfxQJex5INjBvwVcXX'
+access_token <- '1464626303047458826-Fdaj2PXpFeGRTOYhgX8oy5hSnuXiSG'
+access_secret <- '0iwXvcpDEsGtoMlvlks14YbGH2QwvJdnktaCnoeVtvSBP'
+
+setup_twitter_oauth(consumer_key,consumer_secret,access_token,access_secret)
+
+origop <- options("httr_oauth_cache")
+options(httr_oauth_cache = TRUE)
+```
+
+```{r}
+tweets_T <- searchTwitter("#EnergyTransition", n=200, lang="en", resultType="recent") #n recent tweets about Energy Transition, in English ( Twitter sometimes modifies number of tweets that you can collect)
+tweets_C <- searchTwitter("#SustainableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Sustainable Energy
+tweets_B <- searchTwitter("#RenewableEnergy", n=200, lang="en", resultType="recent") #n recent tweets about Renewable Energy
+
+######################## Sentiment analysis
+tweets_T.text <- laply(tweets_T, function(t)t$getText()) #get text out of tweets 
+tweets_C.text <- laply(tweets_C, function(t)t$getText()) #get text out of tweets
+tweets_B.text <- laply(tweets_B, function(t)t$getText()) #get text out of tweets
+#taken from https://github.com/mjhea0/twitter-sentiment-analysis
+pos <- scan('positive-words.txt', what = 'character', comment.char=';') #read the positive words
+neg <- scan('negative-words.txt', what = 'character', comment.char=';') #read the negative words
+source("sentiment3.R") #load algorithm
+# see sentiment3.R form more information about sentiment analysis. It assigns a intereger score
+# by subtracting the number of occurrence of negative words from that of positive words
+analysis_T <- score.sentiment(tweets_T.text, pos, neg)
+analysis_C <- score.sentiment(tweets_C.text, pos, neg)
+analysis_B <- score.sentiment(tweets_B.text, pos, neg)
+sem<-data.frame(analysis_T$score, analysis_C$score, analysis_B$score)
+semFrame <-melt(sem, measured=c(analysis_T.score,analysis_C.score, analysis_B.score ))
+names(semFrame) <- c("Candidate", "score")
+semFrame$Candidate <-factor(semFrame$Candidate, labels=c("Energy Transition", "Sustainable Energy", "Renewable Energy")) # change the labels for your individual/organisation
+```
+
+### Homogeneity of variance analysis
+
+Analyze the homogeneity of variance of sentiments of the tweets of the
+different individuals/organisations, and provide interpretation
+
+```{r}
+#include your code and output in the document
+library(car)
+leveneTest(semFrame$score, semFrame$Candidate, center = median)
+```
+
+The variance across the different organisations is tested using the
+Levene's test. The P test results in a value of 0.07619, which is above
+0.05. Thus, it can be concluded that there is no reason to reject the
+null hypothesis and we can assume the organisations have similar
+variance.
+<!-- Is the variance across the different organisations equal? -->
+
+### Visual inspection Mean and distribution sentiments
+
+Graphically examine the mean and distribution sentiments of tweets for
+each individual/organisation, and provide interpretation
+
+```{r}
+#include your code and output in the document
+energyTransition<-semFrame[semFrame$Candidate=="Energy Transition",]
+#print(energyTransition)
+hist(energyTransition$score, xlab="score")
+sustainableEnergy<-semFrame[semFrame$Candidate=="Sustainable Energy",]
+#print(sustainableEnergy)
+hist(sustainableEnergy$score, xlab="score")
+renewableEnergy<-semFrame[semFrame$Candidate=="Renewable Energy",]
+#print(renewableEnergy)
+hist(renewableEnergy$score, xlab="score")
+mysummary <- function(x,npar=TRUE,print=TRUE) {
+if (!npar) {
+center <- mean(x); spread <- sd(x)
+} else {
+center <- median(x); spread <- mad(x)
+}
+if (print & !npar) {
+cat("Mean=", center, "\n", "SD=", spread, "\n")
+} else if (print & npar) {
+cat("Median=", center, "\n", "MAD=", spread, "\n")
+}
+result <- list(center=center,spread=spread)
+return(result)
+}
+print("Renewable energy:")
+d<-mysummary(renewableEnergy$score, FALSE)
+print("Sustainable energy:")
+d<-mysummary(sustainableEnergy$score, FALSE)
+print("Energy transition:")
+d<-mysummary(energyTransition$score, FALSE)
+boxplot(score ~ Candidate, data=semFrame, main="Sentiment distribution in tweets",
+xlab="Organisation", ylab="score")
+```
+
+The means for Renewable Energy and Energy Transition are close to each
+other, whereas the mean for Sustainable Energy is significantly lower.
+The standard deviations for all organisations are similar.
+
+From the boxplot we can see that for all three topics, the interquartile
+ranges of the sentiments all lie on the interval [0,1].
+
+### Frequentist approach
+
+#### Linear model
+
+Use a linear model to analyze whether the knowledge to which
+individual/organisation a tweet relates has a significant impact on
+explaining the sentiments of the tweets. Assume a Gaussian distribution
+for the tweet's sentiments rating. Provide interpretation of results
+
+```{r}
+#include your code and output in the document
+model0<- lm(score ~ 1, data = semFrame, na.action = na.exclude) #model without predictor
+model1 <- lm(score ~ Candidate, data = semFrame, na.action = na.exclude) #model with predictor
+library(pander)
+pander(anova(model0, model1),
+caption = "Compare if knowledge provide better fit than no knowledge")
+pander(anova(model1),
+caption = "Effect of organisation type on post test score")
+pander(summary(model1))
+library(car)
+pander(Anova(model1))
+```
+
+<!-- The p-value is significantly smaller than 0.05, thus we can reject the null hypothesis. Thus, the organisation gives insight into the sentiment. -->
+
+<!-- From the last column in the summary model, we see that the p-value for sustainableEnergy and renewableEnergy is larger than 0.05. Thus the organisation has no significant impact on the output score. -->
+
+<!-- R-squared is 0.04156, which means that 4% percent of the variance in the observed data can be explained by the model, which is very small. 86% cannot be explained by the model. -->
+
+The F-value in an ANOVA is calculated as: variation between sample means
+/ variation within the samples. The higher the F-value in an ANOVA, the
+higher the variation between sample means relative to the variation
+within the samples. The higher the F-value, the lower the corresponding
+p-value. The p-value is 0.0637. This means the difference in sentiment
+between the organisations would happen 6.735% of the time. As the
+difference is larger than 0.05, the difference is not statistically
+significant and is likely due to chance. TODO: this is not correct,
+write about significant p value, but indeed very low r\^2 so very little
+meaning to the model
+
+#### Post Hoc analysis
+
+If a model that includes the individual/organisation is better in
+explaining the sentiments of tweets than a model without such predictor,
+conduct a post-hoc analysis with e.g. Bonferroni correction, to examine
+which of individual/organisation tweets differ from the other
+individual/organisation tweets. Provide interpretation of the results.
+
+```{r}
+#include your code and output in the document
+pairwise.t.test(semFrame$score, semFrame$Candidate, paired = FALSE, p.adjust.method = "bonferroni")
+# plot(model1)
+pander(tapply(semFrame$score, semFrame$Candidate, shapiro.test)) # test normaliy of each level
+leveneTest(semFrame$score, semFrame$Candidate)
+
+```
+
+The p-values corrected with Bonferroni show that the p-values are still
+above 0.05 between all groups. Therefore, no organisation is better in
+explaining the sentiment of tweets.
+
+#### Report section for a scientific publication
+
+Write a small section for a scientific publication (journal or a
+conference), in which you report the results of the analyses, and
+explain the conclusions that can be drawn in a format commonly used by
+the scientific community Look at Brightspace for examples papers and
+guidelines on how to do this.
+
+<!-- Tweets without the knowledge of each organisation did have significant (t(597) = 12.94, p=3.141e-06) different post test scores (M = 0.395, SD = 0.03145) than the tweets with knowledge of each organisation (energyTransition: M = 0.17500 , SD = 0.8047441), (sustainableEnergy: M = 0.53, SD = 0.7153029) and (renewableEnergy: M = 0.48, SD = 0.7432105).  -->
+
+A Linear Model analysis was conducted to test the difference between
+cohorts on the organisations. The results found a significant effect
+(F(2, 597)=2.7101, p \< 0.06735) for the cohorts on the organisations.
+
+### Bayesian Approach
+
+#### Model description
+
+Describe the mathematical model fitted on the most extensive model.
+(hint, look at the mark down file of the lectures to see example on
+formulate mathematical models in markdown). Assume a Gaussian
+distribution for the tweet's sentiments rating. Justify the priors.
+
+Null model:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
+library(rethinking)
+m000 <-map2stan(
+  alist(
+  score ~ dnorm(mu, sigma),
+  mu <- a,
+  a ~ dnorm(0, 1),
+  sigma ~ dnorm(0, 1)
+  ), data = semFrame ,iter = 100, chains = 4, cores = 4
+)
+```
+
+Model model that includes organisation as a factor:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, include = FALSE}
+m111 <-map2stan(
+  alist(
+  score ~ dnorm(mu, sigma),
+  mu <- a[Candidate],
+  a[Candidate] ~ dnorm(0, 1),
+  sigma ~ dnorm(0, 1)
+  ), data = semFrame ,iter = 100, chains = 4, cores = 4
+)
+```
+
+Mathematical model:
+
+$score \sim Norm(\mu , \sigma)$ [likelihood] $\mu = a$ [linear model]
+$a \sim Norm(0.5,1)$ [prior] $\sigma \sim uniform(0,1)$ [prior]
+
+The chosen priors are $\mu \~ Norm(0.5, 1.0)$ as we on average sentiment
+levels range from -1 to 2, taking 0.5 as it is a neutral value for
+sentiment. $\sigma$ is picked as a uniform prior between 0 and 1.
+
+#### Model comparison
+
+Conduct model analysis and provide brief interpretation of the results.
+
+```{r}
+#include your code and output in the document
+library(Bolstad)
+fit <-bayes.t.test(sustainableEnergy$score, renewableEnergy$score, paired=TRUE)
+show(fit)
+# plot(fit)
+compare(m000, m111, func=WAIC)
+precis(m111, depth=2, prob = .95)
+```
+
+The WAIC for model 1 is smaller than the WAIC of model 0, thus we can
+say that model 1 has improved from model 0.
+
+#### Comparison individual/organisation pair
+
+Compare sentiments of individual/organisation pairs and provide a brief
+interpretation (e.g. CIs)
+
+```{R}
+p1 <- precis(m111, depth=2, prob = .95)
+# plot(p1)
+```
+
+EnergyTransition has the most distinct mean compared to
+sustainableEnergy and renewableEnergy.
+
+## Question 2 - Website visits (between groups - Two factors)
+
+### Conceptual model
+
+Make a conceptual model underlying this research question
+
+![Conceptual model Twitter sentiment
+analysis](C:%5CAAASweepsta%5CMSc.%20Computer%20Science%5CSeminar%20Data%20Science%5CCoursework%5CCoursework%20A%5CSeminarDataScience%5CassignmentA%5Cquestion3.png)
+
+### Visual inspection
+
+Graphically examine the variation in page mean number of visits for the
+four different conditions
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(devtools)
+library(ggplot2)
+# library(rcompanion)
+library(dplyr)
+library(gmodels)
+library(pander)
+library(car)
+
+# setwd("C:/Users/ilgin/OneDrive/Documents/GitHub/SeminarDataScience/assignmentA")
+webvisit<- read.csv("webvisit2.csv")
+#levenes test
+pander(leveneTest(webvisit$pages, interaction(webvisit$version , webvisit$portal)),
+caption = "Levenes Test on homogeneity of variance accross 4 conditions")
+```
+
+Levenes test found significant difference between the 4 conditions with
+a p-value less than 0.05. The two by two experiment consists of factors
+version and portal.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+webvisit$versionF <- factor(webvisit$version, levels=c(0,1), labels = c(0,1))
+webvisit$portalF <- factor(webvisit$portal, levels=c(0,1), labels = c(0,1))
+bar_mean_var <- ggplot(webvisit, aes(versionF , pages, fill = portalF))
+bar_mean_var + stat_summary(fun = mean, geom = "bar", position="dodge")
+```
+
+The two figures shows the mean page visit number for each condition. We
+observe a significant mean difference of greater than 10 in page visit
+between consumers and companies portal entries when website version
+condition is set to new. The observed difference of means is less
+between consumer and company portal conditions when version is set to
+old.
+
+Similarly there is a higher difference in page visit means between new
+and old website version entries for the condition where the portal is a
+company portal.
+
+### Frequentist Approach
+
+#### Model analysis
+
+Conduct a model analysis, to examine the added values of adding 2
+factors and interaction between the factors in the model to predict page
+visits, and include brief interpretation of the results.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+model0 <- glm(pages ~ 1 , family='poisson', data = webvisit, na.action = na.exclude)
+model1 <- glm(pages ~ versionF , family='poisson', data = webvisit, na.action = na.exclude)
+model2 <- glm(pages ~ portalF , family='poisson', data = webvisit, na.action = na.exclude)
+model3 <- glm(pages ~ versionF + portalF ,family='poisson',  data = webvisit, na.action = na.exclude)
+model4 <- glm(pages ~ versionF + portalF + versionF:portalF ,family='poisson', data = webvisit, na.action = na.exclude)
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+anova(model0,model1,test="Chisq")
+       #caption = "Version as main effect on visited page count")
+```
+
+The p-value is 2.2e-16, that is less than 0.01. This implies we reject
+the null hypothesis in favor that model0 is better, in favor of model1.
+Compared to model0 which only takes the intercept, model2 that takes
+version as a factor is a better fit.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model0,model2,test="Chisq"),
+       caption = "Portal as main effect on visited page count")
+```
+
+The p-value is 1.06e-102, that is less than 0.01. This implies we reject
+the null hypothesis that model0 models is better, in favor of model2.
+Compared to model0 which only takes the intercept, model2 that takes
+portal as a factor is a better fit.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model3,model4,test="Chi"),
+       caption = "Interaction effect on top of two main effects(portal and version)")
+```
+
+The p-value is 3.24e-191, that is less than 0.01. This implies we reject
+the null hypothesis that model3 is better, in favor of model4. Compared
+to model3 which takes the both version and portal as predictors, model4
+that takes both as well as their interaction effect is a better fit.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+pander(anova(model4,test="Chisq"),caption="Effect of version, portal and interaction effect on number of pages visited ")
+```
+
+The extension made by both model 1 and model 2 that take version and
+portal as main effects respectively show improvement over the intercept
+model with significant p values. Furthermore model 4 takes the
+interaction of the two main effects version and portal on top of the two
+main effects. Extension made by model 4 shows improvement over model 3
+with a significant p value. This justifies further exploration of model
+4.
+
+Two-way Anova results of model4 indicate a p-value of 3.24e-191 for the
+interaction between version and portal. This value is statistically
+significant at alpha level 0.05. Similarly, the p-values for the effect
+of version and portal are statistically significant. These results
+indicate that version, portal and their interaction factors have a
+statistically significant effect on web page visit count.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+library(AICcmodavg)
+models <-list(model0, model1, model2, model3, model4)
+model.names <-c("model0","model1","model2","model3","model4")
+pander(aictab(cand.set = models, modnames=model.names)) #model4 is best
+```
+
+From the AIcc analysis we can see that the best model is model 4, the
+interaction model -- the model that includes both portal and version
+parameters as well as their interactions (pages \~ version + portal +
+version:portal). In this case, model 4 is the best model as it contains
+more than 99% of the total explanation that can be found in the full set
+of models and has the lowest AIC score. The next-best model carries much
+less than 1% of the cumulative model weight.
+
+#### Assumption analysis
+
+For the best fitting model, examine graphically the distribution of the
+residuals. Also examine the residuals of the same model but then
+assuming a Gaussian distribution for the number of page visits. Give a
+brief interpretation about Poisson and Gaussian distribution assumption.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+hist(resid(model4))
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+model4_gaussian <- glm(pages ~ versionF + portalF + versionF:portalF ,family='gaussian', data = webvisit, na.action = na.exclude)
+hist(resid(model4_gaussian))
+```
+
+The histograms of residuals for both Gaussian and Poisson distribution
+assumptions appear roughly normally distributed. This implies that for
+both cases, the normal distribution of error assumptions are valid. The
+residual value has more variance in the Gaussian model as they range
+from (-15,15). Residuals in Poisson model histogram show lower variance
+with values in the range (-3,3), suggesting Poisson assumption could be
+more suitable for this dataset.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+plot(model4)
+```
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+plot(model4_gaussian)
+```
+
+For both Gaussian and Poisson assumptions, residuals are mostly fitted
+on y=x line on Normal Q-Q plots. There is slightly more divergence in
+the tails of the fixed line on the Normal Q-Q plot for Poisson
+assumption compared to the Gaussian.
+
+#### Simple effect analysis
+
+If the analysis shows a significant two-way interaction effect, conduct
+a Simple Effect analysis to explore this interaction effect in more
+detail.It helps first to look at the means of different conditions in a
+figure. Provide brief interpretation of the results.
+
+The model analysis showed a significant two-way interaction effect on
+top of the significant main effects version and portal.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+webvisit$simpeff <- interaction(webvisit$portalF, webvisit$versionF)
+levels(webvisit$simpeff) 
+contrastOld <-c(1,-1,0,0) 
+contrastNew <-c(0,0,1,-1) 
+SimpleEff <- cbind(contrastOld,contrastNew)
+contrasts(webvisit$simpeff) <- SimpleEff
+simpleEffectModel <-glm(pages ~ simpeff , family="poisson", data = webvisit, na.action = na.exclude) 
+pander(summary.glm(simpleEffectModel))
+```
+
+A significant difference can be found in result contrastOld and
+contrastComplex.When page visit counts are compared with the old version
+contrast, we observe a significant difference between customer and
+company portal implementations. Similarly, when page visit counts are
+compared with new version contrast, a significant difference between
+customer and company portal implementations can be observed.
+
+#### Report section for a scientific publication
+
+A linear model assuming Poisson distribution for website page visit
+count was fitted on the impact of number of pages visited on the
+webserver of company X, taking website version and website portal entry
+type as independent variables, and including a two-way interaction
+between these variables.
+
+The analysis found a significant main effect (X2(1, 998) = 2165, p. \<
+0.01) for the website version, significant main effect(X2(1, 997) =
+1805, p. \< 0.01) for website portal entry. The analysis also found a
+significant two-way interaction effect ( F (1, 996) = 934.5, p.\< 0.01)
+between these two variables.
+
+A simple Effect analysis further examined the two-way interaction. It
+revealed a significant (z = 16.18, p. \< 0.01) difference for portal
+entry type of the website with the old website version, as well as a
+significant effect (z = -30.32, p.\<0.01) was found for portal entry
+type with the new website version implementation.
+
+### Bayesian Approach
+
+#### Model description
+
+Describe the mathematical model fitted on the most extensive model.
+(hint, look at the mark down file of the lectures to see example on
+formulate mathematical models in markdown). Assume Poisson distribution
+for the number of page visits. Justify the priors.
+
+$pages \sim Pois(\lambda)$ [likelihood]
+
+$\log(lambda) = a + b\times version + c\times portal + d\times portal\times version$
+[[linear model]]
+
+$a \sim Norm(25, 25)$ [$a$ prior]
+
+$b,c \sim uniform(0, 1)$ [$b$,$c$ priors] $d \sim Norm(0, 10)$ [$d$
+prior]
+
+For parameter a, which represents the intercept, we expect the parameter
+to be anywhere from 0 to 50 as page visit values vary in the data. As
+these are not hard bounds, we will be using normal(25,25). On the other
+hand, parameters b and c represent portal and version factors, which are
+known to be values either 0 or 1. Therefore, we prefer a uniform prior
+for these parameters. Parameter d reflects the interaction effect for
+portal and version factors, for which we preferred a normal(0,10) weakly
+informative prior, as we do not know about the distribution for the
+interactive effect parameter
+
+#### Model comparison
+
+```{r message=FALSE, warning=FALSE, cache=TRUE, include=FALSE, results='hide'}
+wvbayes <- subset(webvisit, select = c(pages,version, portal ))
+wvbayes$portalN <- as.numeric(wvbayes$portal)
+wvbayes$versionN <- as.numeric(wvbayes$version)
+library(rethinking)
+m00 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a,
+    a ~ dnorm(25,25)
+  ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
+)
+m11 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + b*versionN,
+    a ~ dnorm(25,25),
+    b ~ dunif(0, 1)
+  ), data = wvbayes ,iter = 2000, chains = 4, cores = 4
+)
+m22 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + c*portalN,
+    a ~ dnorm(25,25),
+    c ~ dunif(0, 1)
+  ), data = wvbayes,iter = 2000, chains = 4, cores = 4
+)
+m33 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + b*versionN + c*portalN,
+    a ~ dnorm(25,25),
+    b ~ dunif(0, 1),
+    c ~ dunif(0, 1)
+  ), data = wvbayes,iter = 2000, chains = 4, cores = 4
+)
+m44 <-map2stan(
+  alist(
+    pages ~ dpois(lambda),
+    log(lambda) <- a + b*versionN + c*portalN + d*versionN*portalN,
+    a ~ dnorm(25,25),
+    b ~ dunif(0, 1),
+    c ~ dunif(0, 1),
+    d ~ dnorm(0, 10)
+  ), data = wvbayes,iter = 2000, chains = 4, cores = 4
+)
+```
+
+```{r}
+compare(m00,m11,m22,m33,m44)
+```
+
+The compare function shows that m4 has the smallest WAIC value, thus the
+best out-of-sample fit.
+
+```{r}
+precis(m44,prob= .95)
+```
+
+Looking at 95% credible intervals of the parameters of model 4, the
+credible values of coefficient b for version predictor, coefficient c
+portal predictor and coefficient d interaction predictor are not
+including null. As these interval do not contain the value zero, this
+leads to the rejection of the null hypothesis that coefficients b=0,
+c=0, d=0.
+
+# Part 3 - Multilevel model
+
+## Visual inspection
+
+Use graphics to inspect the distribution of the score, and relationship
+between session and score
+
+```{r}
+#include your code and output in the document
+
+# setwd("C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A") 
+
+set <- read.csv("set1.csv")
+
+# Relationship between session and score
+boxplot(score ~ session, data=set, main="Score",
+xlab="Session", ylab="Score over sessions")
+
+```
+
+## Frequentist approach
+
+### Multilevel analysis
+
+Conduct multilevel analysis and calculate 95% confidence intervals
+thereby assuming a Gaussian distribution for the scores, determine:
+
+-   If session has an impact on people score A: The box plot already
+    clearly shows the increasing sessions have a positive correlation
+    with the score. The fit of the data on a model with a fixed effect
+    of the the session (m1_session) has the best AIC score and shows
+    (like the m2_ses_subj model fit as well) that the correlation
+    between session and score is significant (p ≈ 0).
+
+-   If there is significant variance between the participants in their
+    score A: When looking at the confidence intervals of the last model
+    (m2_ses_subj) we see clearly that the intercept of the standard
+    deviation of the subject as random effect is not zero (SD =
+    3.84441), meaning their is variation between participants in their
+    score.
+
+```{r}
+#include your code and output in the document
+library(nlme)
+# m <- lme(score ~ session,random = ~subject|id_c,data=set, method="ML")
+
+
+# don't try this at home
+intercept <- gls(score ~ 1, data=set, method="ML", na.action = na.exclude)
+
+# random intercept
+m0_randomIntercept <- lme(score ~ 1,random = ~1 | subject,method = "ML",data=set, na.action = na.exclude, control = list(opt="optim"))
+
+#
+# m3_subj <- lme(score ~ subject,random = ~1 | subject,method = "ML",data=set, na.action = na.exclude, control = list(opt="optim"))
+# fixed effect 
+m1_session <-  update(m0_randomIntercept, .~. + session)
+# random effect
+m2_ses_subj <- update(m1_session, random = ~session|subject)
+# 
+
+
+summary(m0_randomIntercept)
+summary(m1_session)
+summary(m2_ses_subj)
+intervals(m1_session, 0.95)
+intervals(m2_ses_subj, 0.95)
+
+```
+
+```{r}
+ARModel <- update(m2_ses_subj, correlation = corAR1(0, form = ~session|subject))
+summary(ARModel)
+
+
+```
+
+```{r}
+anova(intercept, m0_randomIntercept, m1_session, m2_ses_subj, ARModel)
+```
+
+```{r}
+sessionsQuadratic <- update(ARModel, .~. + I(session^2))
+sessionsCubic <- update(sessionsQuadratic, .~. + I(session^3))
+anova(intercept, m0_randomIntercept, m1_session, m2_ses_subj, ARModel, sessionsQuadratic, sessionsCubic)
+anova(ARModel, sessionsQuadratic, sessionsCubic)
+```
+
+```{r}
+
+library(pander)
+pander(anova(m0_randomIntercept, m1_session),
+caption = "Compare if knowledge provide better fit than no knowledge")
+
+pander(anova(m0_randomIntercept),
+caption = "Effect of organisation type on post test score")
+
+pander(summary(m1_session))
+
+library(car)
+pander(Anova(m1_session))
+
+intervals(m0_randomIntercept, level = 0.95)
+intervals(m1_session,level = 0.95)
+
+
+```
+
+### Report section for a scientific publication
+
+"Out of multiple models fitted on the data, the m1_session model (fixed
+effects: score \~ session, random effect: subject) best modelled the
+effect of the session and score, influenced by subject variability. It
+showed the best information score (AIC = 939.2). The relationship
+between session and score showed a significant positive correlation
+(intercept = 13.17, session = 0.9916, p-value \< 0.0001). In addition,
+there is a variability among subjects, SD = 3.84441 (95% CI 2.874468
+5.141645). With a Bayesian approach also the model with the fixed effect
+for score and session proves to attain the best information score (WAIC
+= 840.7, SE = 23.5), with a nearly constant factor estimate for the
+session effect (b: mean = 0.99, 95% CI 0.96 1.02)."
+
+## Bayesian approach
+
+### Model description
+
+Describe the mathematical model fitted on the most extensive model.
+(hint, look at the mark down file of the lectures to see example on
+formulate mathematical models in markdown). Assume a Gaussian
+distribution for the scores. Justify the priors.
+
+Mathematical model:
+
+$score \sim Norm(\mu , \sigma)$ [likelihood]
+
+$\mu = a + a\_subject + b*session$ [[linear model]]
+
+$a\_subject \sim Norm(0,\sigma_{subject})$ [adaptive prior]
+
+$\sigma_{subject} = dcauchy(0,1)$ [hyper prior]
+
+$a \sim Norm(15,2.5)$ [fixed prior]
+
+$b \sim Norm(1, 1)$ [fixed prior]
+
+$\sigma \sim dcauchy(0,1)$ [fixed prior]
+
+The priors for a is taken (15,1), as the average and the variation at
+the first sessions indicate so. $\sigma\_{subject}$ is taken a a cauchy
+distribution with a zero intercept and standard $\gamma$ value of 2 as
+distributions of the scores per session is somewhat broad. The b value
+is set with the idea of a steady increase of score per session with a
+value of about 1. The fixed prior $\sigma$ is set to a cauchy
+distribution in the interval [0,1].
+
+### Model comparison
+
+Compare models with with increasing complexity.
+
+```{r eval=FALSE}
+#include your code and output in the document
+library(rethinking)
+
+# fixed intercept
+m0 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a,
+    
+    # fixed priors
+    a~dnorm(15, 2.5),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, log_lik = TRUE
+)
+
+```
+
+```{r eval=FALSE}
+# random intercept
+m1 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a + a_subject[subject], 
+    
+    # adaptive prior
+    a_subject[subject] ~ dnorm(0, sigma_subject),
+    
+    # hyper prior
+    sigma_subject ~ dcauchy(0, 1),
+    
+    # fixed priors
+    a~dnorm(15, 2.5),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, 
+    log_lik = TRUE, control=list(adapt_delta=0.99)
+)
+
+```
+
+```{r eval=FALSE}
+# Fixed effect session
+m2 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a + a_subject[subject] + b*session, 
+    
+    # adaptive prior
+    a_subject[subject] ~ dnorm(0, sigma_subject),
+    
+    # hyper prior
+    sigma_subject ~ dcauchy(0, 1),
+    
+    # fixed priors
+    a ~ dnorm(15, 2.5),
+    b ~ dnorm(1, 1),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, 
+    log_lik = TRUE, control=list(adapt_delta=0.99)
+)
+
+
+```
+
+```{r eval=FALSE}
+# Random slope
+m3 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a + a_subject[subject] + 
+      (b + b_subject[subject])*session, 
+    
+    # adaptive prior
+    a_subject[subject] ~ dnorm(0, a_sigma_subject),
+    b_subject[subject] ~ dnorm(0, b_sigma_subject),
+    
+    # hyper prior
+    c(a_sigma_subject, b_sigma_subject) ~ dcauchy(0, 1),
+    
+    # fixed priors
+    a ~ dnorm(15, 2.5),
+    b ~ dnorm(1, 1),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, 
+    log_lik = TRUE, control=list(adapt_delta=0.99), 
+    max_treedepth = 15
+)
+
+```
+
+```{r eval=FALSE}
+# Correlation
+m4 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a + a_subject[subject] + 
+      b_subject[subject]*session, 
+    
+    # adaptive prior
+    c(a_subject, b_subject)[subject] ~ multi_normal(c(a,b), 
+                                                    Rho, sigma_subject),
+    
+    # hyper prior
+    sigma_subject ~ dcauchy(0, 1),
+    Rho ~ dlkjcorr(2),
+    
+    # fixed priors
+    a ~ dnorm(15, 2.5),
+    b ~ dnorm(1, 1),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, 
+    log_lik = TRUE, control=list(adapt_delta=0.99), 
+    max_treedepth = 15
+)
+```
+
+```{r eval=FALSE}
+# Quadratic
+set$session2 <- set$session*set$session
+
+m5 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a_subject[subject] + 
+      b_subject[subject]*session + 
+      c*session2, 
+    
+    # adaptive prior
+    c(a_subject, b_subject)[subject] ~ multi_normal(c(a,b), 
+                                                    Rho, sigma_subject),
+    
+    # hyper prior
+    sigma_subject ~ dcauchy(0, 1),
+    Rho ~ dlkjcorr(2),
+    
+    # fixed priors
+    a ~ dnorm(15, 2.5),
+    c(b,c) ~ dnorm(1, 1),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, 
+    log_lik = TRUE, control=list(adapt_delta=0.99), 
+    max_treedepth = 15
+)
+```
+
+```{r eval=FALSE}
+# Cubic
+set$session3 <- set$session2*set$session
+
+m6 <- ulam(
+  alist(
+    #Likelihood
+    score ~dnorm(mu, sigma),
+    
+    #Linear model 
+    mu <- a_subject[subject] + 
+      b_subject[subject]*session + 
+      c*session2 + d*session3, 
+    
+    # adaptive prior
+    c(a_subject, b_subject)[subject] ~ multi_normal(c(a,b), 
+                                                    Rho, sigma_subject),
+    
+    # hyper prior
+    sigma_subject ~ dcauchy(0, 1),
+    Rho ~ dlkjcorr(2),
+    
+    # fixed priors
+    a~dnorm(15, 2.5),
+    c(b,c,d) ~ dnorm(1, 1),
+    sigma ~ dcauchy(0,1)
+  ), data = set, iter = 10000, chains = 4, cores = 4, 
+    log_lik = TRUE, control=list(adapt_delta=0.99), 
+    max_treedepth = 15
+)
+```
+
+```{r}
+library(ggplot2)
+
+
+#include your code and output in the document
+# compare(m0,m1, func=WAIC)
+compare(m0,m1,m2,m3,m4,m5,m6, func=WAIC)
+precis(m2, depth = 2, prob=.95)
+```
+
+Looking at the WAIC scores, the fixed effect of session creates the
+largest information improvement. All the other extended models seem to
+describe about equally well, but seem to over complicate the true model
+given the fact that the fixed effect model scores equally among these
+similarly scoring models.
+
+### Estimates examination
+
+Examine the estimate of parameters of the model with best fit, and
+provide a brief interpretation.
+
+```{r}
+plot(compare(m0,m1,m2,m3,m4,m5,m6, func=WAIC))
+plot(precis(m2, depth = 2, prob=.95))
+
+```
+
+The parameter a is similar to our mathematical model (mean = 11.86, sd =
+0.90) but with a lower standard deviation, meaning it is less variable
+than expected. $\sigma\*{subject}$ is estimated around 4, which we thus
+wrongly set to variate around 0. The estimate of b is nearly constant
+(mean = 0.99 sd = 0.02), where we believed it to vary with a sd = 1.
+This indicates the effect of session on score is really strongly
+correlated without much variation. Also the standard\* $\sigma$ of the
+score likelihood is very stable (mean = 1.02, sd = 0.05). The expected
+choice of this variable (along with $\sigma{subject}$) to variate around
+0 seems in retrospect not vey likely, as one will in general expect some
+standard deviation around the score and subjects.
