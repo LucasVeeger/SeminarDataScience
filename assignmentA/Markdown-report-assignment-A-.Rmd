@@ -1238,6 +1238,11 @@ m6 <- ulam(
 ```
 
 ```{r}
+load('C:/AAASweepsta/MSc. Computer Science/Seminar Data Science/Coursework/Coursework A/SeminarDataScience/assignmentA/finalEnv.RData')
+```
+
+
+```{r}
 library(ggplot2)
 
 
